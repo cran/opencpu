@@ -1,0 +1,17 @@
+1.0.4
+ - Fixed bug when timeout > 60s (reported by Jordy Coolen)
+ - Fixed nginx warning in the cloud server
+ - Upgrade evaluate to 0.5.1
+
+1.0.3
+ - Invisible return values are now stored but not printed
+ - Dependency update to evaluate 0.4.10
+
+1.0.2
+ - Capture output for install.packages, install_github and biocInstaller
+ - Remove rapache library change in onAttach
+
+1.0.1 
+ - Fix bugs for uploading files
+ - Fix bugs for storing files from a session
+ - Set default bitmap type to Cairo (to prevent problems with forks on MAC)

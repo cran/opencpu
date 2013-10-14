@@ -36,17 +36,20 @@ session <- local({
     });
     
     #setup handler
-    myhandler <- evaluate::new_output_handler(value=function(myval){
+    myhandler <- evaluate::new_output_handler(value=function(myval, visible=TRUE){
       if(isTRUE(storeval)){
         assign(".val", myval, sessionenv);
       }
-      #note: print can be really, really slow
-      if(identical(class(myval), "list")){
-        cat("List of length ", length(myval), "\n");
-        cat(paste("[", names(myval), "]", sep="", collapse="\n"));
-      } else {
-        from("evaluate", "render")(myval);
+      if(isTRUE(visible)){
+        #note: print can be really, really slow
+        if(identical(class(myval), "list")){
+          cat("List of length ", length(myval), "\n");
+          cat(paste("[", names(myval), "]", sep="", collapse="\n"));
+        } else {
+          from("evaluate", "render")(myval);
+        }
       }
+      invisible();
     });
     
     #create session for output objects
@@ -71,7 +74,7 @@ session <- local({
       outputlist <- RAppArmor::eval.secure({
         output <- evaluate::evaluate(input=input, envir=sessionenv, stop_on_error=2, new_device=FALSE, output_handler=myhandler);
         list(output=output, sessionenv=sessionenv);
-      }, profile = "opencpu-exec");
+      }, profile = "opencpu-exec", timeout=9999999); #timeout already set earlier
       output <- outputlist$output;
       sessionenv <- outputlist$sessionenv;
     } else {
