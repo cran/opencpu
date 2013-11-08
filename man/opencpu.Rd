@@ -3,6 +3,9 @@
 \alias{opencpu}
 \title{The httpuv based single-user OpenCPU server.}
 \format{Control object}
+\usage{
+  opencpu
+}
 \description{
   This object controls the httpuv based OpenCPU server.
   This is the preferred method of running OpenCPU inside an
@@ -34,7 +37,8 @@
 opencpu$start(12345);
 opencpu$restart()
 opencpu$url()
-opencpu$browse('library/stats/man/glm')
+opencpu$browse('/test')
+opencpu$view('/test')
 opencpu$stop()
 }
 }

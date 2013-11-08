@@ -24,8 +24,8 @@
 #' @importFrom pander pander
 #' @importFrom RJSONIO toJSON fromJSON isValidJSON
 #' @importFrom httr GET stop_for_status add_headers
+#' @importFrom httpuv runServer
 #' @S3method print opencpu
-#' @usage -
 #' @format Control object
 #' @family opencpu
 #' @export
@@ -35,7 +35,8 @@
 #' opencpu$start(12345);
 #' opencpu$restart()
 #' opencpu$url()
-#' opencpu$browse('library/stats/man/glm')
+#' opencpu$browse('/test')
+#' opencpu$view('/test')
 #' opencpu$stop()
 #' }
 opencpu <- local({
@@ -53,6 +54,16 @@ opencpu <- local({
     message("OpenCPU stopped.")
     try(parallel::stopCluster(cl), silent=TRUE);
     invisible();
+  }
+  
+  debug <- function(port=9999, rootpath = "/ocpu"){
+    rootpath <- sub("^//", "/", paste0("/", rootpath));
+    rootpath <- sub("/$", "", rootpath);
+    cat(paste0("Starting server at http://localhost:", port, rootpath), "\n");
+    cat("To terminate server, hit ESC (or press STOP in rstudio).")
+    httpuv::runServer("0.0.0.0", port, list(
+      call=get("rookhandler", envir=asNamespace("opencpu"))(rootpath)
+    ));
   }
   
   start <- function(port, rootpath = "/ocpu"){
@@ -123,13 +134,27 @@ opencpu <- local({
     return(uvurl)
   }
   
-  browse <- function(path="/library/"){
-    path <- sub("^//", "/", paste0("/", path));    
+  browse <- function(path="/test/", viewer=FALSE){
     if(is.null(uvurl)){
       message("OpenCPU not started.")
       return(invisible());
     }
-    browseURL(paste0(uvurl, path));    
+    
+    #build url path
+    path <- sub("^//", "/", paste0("/", path));   
+    viewurl <- paste0(uvurl, path);    
+
+    #use viewer or not
+    IDEviewer <- getOption("viewer")
+    if (isTRUE(viewer) && !is.null(IDEviewer)) {
+      IDEviewer(viewurl);
+    } else {
+      utils::browseURL(viewurl);
+    }    
+  }
+  
+  view <- function(path="/test/"){
+    browse(path=path, viewer=TRUE)
   }
   
   restart <- function(){
@@ -154,6 +179,7 @@ print.opencpu <- function(x, ...){
   cat("  opencpu$start(12345)                     - Start server on port 12345.\n")
   cat("  opencpu$restart()                        - Restart current server.\n")    
   cat("  opencpu$url()                            - Return the server address of current server.\n")
-  cat("  opencpu$browse('/library/stats/man/glm') - Try to open current server in a web browser.\n")  
+  cat("  opencpu$view('/test')                    - Open active server in viewer (if available) or browser.\n")    
+  cat("  opencpu$browse('/test')                  - Open active server in a web browser.\n")  
   cat("Note that httpuv runs in a parallel process and does not interact with the current session.\n")  
 }
