@@ -2,7 +2,7 @@ Package: opencpu
 Type: Package
 Title: OpenCPU framework for embedded statistical computation and
         reproducible research.
-Version: 1.2.0
+Version: 1.2.1
 Date: 2013-12-12
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
@@ -24,7 +24,7 @@ Description: The OpenCPU framework exposes a web API interfacing R, Latex and
     the core of the framework. When loaded in R, it automatically initiates the
     single-user server and displays the web address in the console. For more
     information, visit the OpenCPU website.
-Packaged: 2013-12-13 08:16:02 UTC; jeroen
+Packaged: 2013-12-18 04:27:46 UTC; jeroen
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-12-13 10:26:28
+Date/Publication: 2013-12-18 07:29:52
