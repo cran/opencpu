@@ -16,21 +16,29 @@
     
     #start rhttpd only in rstudio server
     if(nchar(Sys.getenv("RSTUDIO_HTTP_REFERER"))){
-      rhttpd$init();        
+      rhttpd$init();
     }
     
     #Start HTTPUV
     opencpu$start();
   
-    #Make sure httpuv stops when exiting R.
-    if(!exists(".Last", globalenv())){
+    #Try to stop httpuv if opencpu is still attached when exiting R
+    reg.finalizer(globalenv(), function(env){
+      #if not attached, then .onDetach already stopped the server
+      if("package:opencpu" %in% search()){
+        opencpu$stop();
+      }
+    }, onexit = TRUE);
+    
+    #on windows the finalizer doesn't always work
+    if(identical(.Platform$OS.type, "windows") && !exists(".Last", globalenv())){
       exitfun <- function(){
-        try({
-          get("opencpu", asNamespace("opencpu"))$stop();
-          rm(".Last", envir=globalenv());
-        }, silent=TRUE);
-      } 
-  
+        if("package:opencpu" %in% search()){
+          suppressMessages(opencpu$stop());
+          get("cleanwin", asNamespace("opencpu"))();
+        }
+        rm(".Last", envir=globalenv());
+      }
       environment(exitfun) <- globalenv();
       eval(call("assign", ".Last", quote(exitfun), quote(globalenv())));
     }
@@ -39,7 +47,7 @@
   }
 }
 
+#onDetach for detach
 .onDetach <- function(libpath){
   opencpu$stop();
-  message("Exiting OpenCPU");
 }

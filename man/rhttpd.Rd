@@ -30,8 +30,8 @@
 \dontrun{
 rhttpd$init()
 rhttpd$url()
+rhttpd$view('/test')
 rhttpd$browse('test')
-rhttpd$view('test')
 }
 }
 \references{

@@ -1,5 +1,17 @@
+1.2.0
+ - Replaced dependency RJSONIO with jsonlite for all toJSON/fromJSON
+ - Add support for pkg/data API
+ - Improve CI email notifications
+ - add /console shortcut
+ - correct MIME headers for fonts
+
+1.0.7
+ - Adding Github CI stuff
+ - New config parameters: "public.url" and "smtp.server", "timelimit.webhook"
+
 1.0.6
  - Version bump for CRAN release.
+ - Detect /ocpu/user libraries from /etc/passwd.
 
 1.0.5
  - Don't fork on MAC for "safe" requests (to reduce risk of fork issues)

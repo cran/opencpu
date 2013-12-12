@@ -22,9 +22,10 @@
 #' @importFrom knitr knit pandoc
 #' @importFrom devtools install_github
 #' @importFrom pander pander
-#' @importFrom RJSONIO toJSON fromJSON isValidJSON
+#' @importFrom jsonlite toJSON fromJSON validate
 #' @importFrom httr GET stop_for_status add_headers
 #' @importFrom httpuv runServer
+#' @usage opencpu$start(12345)
 #' @S3method print opencpu
 #' @format Control object
 #' @family opencpu
@@ -98,6 +99,12 @@ opencpu <- local({
     } else {
       uvurl <<- paste0(gsub(":[0-9]{3,5}", paste(":", myport, sep=""), mainurl), substring(rootpath,2))
     }
+    
+    #make sure we're online
+    Sys.sleep(0.5)
+    checkstatus();
+    
+    #announce url
     message("[httpuv] ", uvurl);    
     invisible();
   }  
@@ -110,24 +117,11 @@ opencpu <- local({
     from("parallel", "recvResult")(getchild()[[1]]);   
   }
   
-  hasdied <- function(){
-    #set the timeout
-    output <- try({
-      setTimeLimit(elapsed=1, transient=TRUE);
-      on.exit({
-        #reset time limit
-        setTimeLimit(cpu=Inf, elapsed=Inf, transient=FALSE);    
-      })
-      readchild()   
-    }, silent=TRUE);    
-    
-    if(is(output, "try-error") && grepl("reached elapsed time limit", output)){
-      return(FALSE);
-    } else {
-      message(output);
-      this$stop();
-      return(invisible(TRUE));
-    }
+  checkstatus <- function(){
+    tryCatch(stop_for_status(GET(paste0(uvurl, "/test/"))), error = function(e){
+      message("Server unresponsive... attempting restart.")
+      restart();
+    });
   }
   
   url <- function(){
@@ -136,9 +130,12 @@ opencpu <- local({
   
   browse <- function(path="/test/", viewer=FALSE){
     if(is.null(uvurl)){
-      message("OpenCPU not started.")
+      message("OpenCPU not started. Use: opencpu$start()")
       return(invisible());
     }
+    
+    #check that server is online
+    checkstatus();
     
     #build url path
     path <- sub("^//", "/", paste0("/", path));   
