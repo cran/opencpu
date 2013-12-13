@@ -25,12 +25,14 @@ packagename = "";
   }
   
   #set some global options
-  options(max.print=50);
+  options(max.print=1000);
   options(device=grDevices::pdf);
   options(menu.graphics=FALSE);
   options(repos=config('repos'));
   options(keep.source = FALSE);
   options(useFancyQuotes = FALSE);
+  options(warning.length=8000);
+  options(scipen=3);
   
   #use cairo if available
   if(isTRUE(capabilities()[["cairo"]])){
