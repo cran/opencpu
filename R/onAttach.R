@@ -2,25 +2,29 @@
   #Cloud specific stuff
   if(isTRUE(getOption("rapache"))){
     
-    #try set tempdir() to match config("tempdir")
+    #load opencpu configuration
+    loadconfigs(preload=TRUE);     
+    
+    #try set tempdir() to match config("tempdir"). Must be after loadconfigs!
     inittempdir();
     
-    #move opencpu system lib to the end of the search lib
-    #note: removing a lib from which packages are already loaded results in weird behavior.
-    #.libPaths(c(.Library.site, .Library, "/usr/lib/opencpu/library"));
-    #note undo this because of version conflicts with packages installed in global library
+    #for the log files
+    packageStartupMessage("OpenCPU cloud server ready.");
   
   } else if(interactive() && !("--slave" %in% commandArgs())){
+    #This will start XQuartz in OSX
+    capabilities();
+    
     #Dont run in rscript
     packageStartupMessage("Initiating OpenCPU server...")
+    
+    #Start HTTPUV
+    opencpu$start();
     
     #start rhttpd only in rstudio server
     if(nchar(Sys.getenv("RSTUDIO_HTTP_REFERER"))){
       rhttpd$init();
     }
-    
-    #Start HTTPUV
-    opencpu$start();
   
     #Try to stop httpuv if opencpu is still attached when exiting R
     reg.finalizer(globalenv(), function(env){

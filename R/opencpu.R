@@ -101,10 +101,10 @@ opencpu <- local({
     }
     
     #make sure we're online
-    Sys.sleep(0.5)
     checkstatus();
     
     #announce url
+    message("OpenCPU started.")
     message("[httpuv] ", uvurl);    
     invisible();
   }  
@@ -118,10 +118,22 @@ opencpu <- local({
   }
   
   checkstatus <- function(){
-    tryCatch(stop_for_status(GET(paste0(uvurl, "/test/"))), error = function(e){
-      message("Server unresponsive... attempting restart.")
-      restart();
-    });
+    iswaiting = FALSE;
+    #try 10 times max
+    #total time is (GET-timeout + 0.5) * 10
+    for(i in 1:10){
+      tryCatch({
+        stop_for_status(GET(paste0(uvurl, "/test/")));
+        return("OK");
+      }, error = function(e){
+        if(i == 3){
+          message("Waiting for server to respond...");
+        }
+        Sys.sleep(0.5);
+      });
+    }
+    message("Server unresponsive; restarting.")
+    restart(); 
   }
   
   url <- function(){

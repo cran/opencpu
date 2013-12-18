@@ -30,7 +30,7 @@ bioc_load <- function(pkgname, biocpath){
   
   #NOTE: for now we can't capture output from install.packages
   if(pkgname == "BiocInstaller"){
-    output <- try_rscript('source("http://bioconductor.org/biocLite.R");')
+    output <- try_rscript(paste0('.libPaths(', deparse(biocpath), '); source("http://bioconductor.org/biocLite.R");'));
   } else {
     output <- try_rscript(paste0("BiocInstaller::biocLite(", deparse(pkgname), ", ask=FALSE, lib.loc=", deparse(biocpath), ", lib=", deparse(biocpath), ");"))
   }
@@ -44,9 +44,12 @@ bioc_load <- function(pkgname, biocpath){
     return(system.file(package="BiocInstaller"));
   }
 
-  #check if package has been installed 
+  #check if package has been installed
   if(!file.exists(pkgpath)){
-    stop("Package installation of ", pkgname, " was unsuccessful\n\n", paste(output, collapse="\n"));
+    #note that stop() might not work because error message is too large (install log)
+    header <- paste("Package installation of", pkgname, "was unsuccessful.\n\n");
+    msg <- paste(output, collapse="\n");
+    res$error(paste(header, msg, sep="\n"));
   }
   
   #return the path 
