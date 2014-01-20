@@ -22,12 +22,20 @@ req <- local({
   };
   
   uri <- function(){
-    paste(mount(), path_info(), sep="");
+    #this will result in relative url redirects
+    return(mount())
+    
+    #this will result in absolute url redirects
+    #return(fullmount())
   };
   
   mount <- function(){
     getvalue("MOUNT");
   };
+  
+  fullmount <- function(){
+    getvalue("FULLMOUNT");    
+  }
   
   path_info <- function(){
     getvalue("PATH_INFO");

@@ -9,19 +9,8 @@
 
 <!-- Le styles -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<style>
-body {
-	padding-top: 60px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
-}
-</style>
 <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="debug.css" rel="stylesheet">
-
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
 
 </head>
 
@@ -73,7 +62,7 @@ body {
 		</div>
 	</div>
 
-	<div class="navbar navbar-fixed-top">
+	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse"
@@ -82,10 +71,11 @@ body {
 				</a> <a class="brand" href="#">OpenCPU API Explorer</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a target="_blank" href="http://opencpu.org">Website</a></li>
-              <li><a target="_blank" href="http://jeroenooms.github.io/opencpu-manual/opencpu-manual.pdf">PDF manual</a></li>
-						<li><a target="_blank" href="http://github.com/jeroenooms/opencpu">Source</a></li>
-						<li><a target="_blank" href="http://jeroenooms.github.io">Author</a></li>
+						<li><a target="_blank" href="https://public.opencpu.org/api.html#api-methods">API docs</a></li>
+            <li><a target="_blank" href="https://public.opencpu.org/apps.html">Example Apps</a></li>
+            <li><a target="_blank" href="https://public.opencpu.org/jslib.html">JavaScript Client</a></li>
+            <li><a target="_blank" href="http://jeroenooms.github.com/opencpu-manual/opencpu-server.pdf">PDF manual</a></li>
+						<li><a target="_blank" href="http://github.com/jeroenooms/opencpu">Source Code</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -93,7 +83,7 @@ body {
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container" id="maincontainer">
 
 		<div class="row show-grid">
 			<div id="leftcolumn" class="span6">
@@ -112,21 +102,23 @@ body {
 										<select class="input-small" id="httpmethod">
 											<option>GET</option>
 											<option>POST</option>
-											<option>PUT</option>
+  										<option>OPTIONS</option>
+                      <!--
+                      <option>PUT</option>
 											<option>DELETE</option>
-											<option>OPTIONS</option>
 											<option>HEAD</option>
+                      -->
 										</select>
 									</div>
 								</div>
 							</div>
-
-							<div class="span4">
+              
+							<div id="urlwrapper" class="span4">
 								<div class="control-group">
 									<label class="control-label" for="urlvalue">Endpoint</label>
 									<div class="controls">
 										<input type="text" class="input-xlarge" id="urlvalue"
-											value="/ocpu/library/">
+											value="../library/">
 									</div>
 								</div>
 							</div>
@@ -140,13 +132,13 @@ body {
 							<div class="row show-grid">
 								<div class="span2">
 									<div class="control-group">
-										<label class="control-label">Parameter Name</label>
+										<label class="control-label">Param Name</label>
 									</div>
 								</div>
 
 								<div class="span3">
 									<div class="control-group">
-										<label class="control-label">Parameter Value</label>
+										<label class="control-label">Param Value</label>
 									</div>
 								</div>
 							</div>
@@ -164,14 +156,6 @@ body {
 						<br />
 
 						<div align="right">
-							<button id="submitblank" class="btn btn-success"
-								data-targetframe="_blank">
-								<i class="icon-share icon-white"></i> Popup
-							</button>
-							<button id="submitform" class="btn btn-success">
-								<i class="icon-share icon-white"></i> iFrame
-							</button>
-							<img src="spinner.gif" id="formspinner" />
 							<button id="submitajax" class="btn btn-success btn-large">
 								<i class="icon-download-alt icon-white"></i> Ajax request
 							</button>
@@ -186,17 +170,8 @@ body {
 					<a class="close" data-dismiss="alert">&times;</a> <strong>Welcome!</strong>
           Use this simple page to poke around at the API.
           Specify HTTP method, URL and parameters, and click on <b>Ajax Request</b>.
-          For requests with file uploads, use the <b>iFrame</b> request instead.
-				</div>        
-
-				<div class="alert">
-					<a class="close" data-dismiss="alert">&times;</a> <strong>Keep
-						in mind!</strong> Form method only supports GET and POST. Ajax method does
-					not support binary streams like uploading files or downloading
-					images. Keep in mind that for cross domain Ajax, CORS needs to be
-					enabled on the target server.
+          Note that this page requires a browser with HTML5 support.
 				</div>
-
 
 			</div>
 
@@ -206,8 +181,6 @@ body {
 					<pre class="pre-scrollable prettyprint linenums" id="outputpre"></pre>
 					<pre class="pre-scrollable prettyprint linenums" id="headerpre"></pre>
 				</div>
-
-				<iframe name="outputframe" id="outputframe" class="input-xxlarge"></iframe>
 			</div>
 		</div>
 
@@ -216,7 +189,7 @@ body {
 
 	</div>
 
-	<script src="jquery-1.7.2.min.js"></script>
+	<script src="jquery-1.10.2.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="debug.js"></script>
   

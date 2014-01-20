@@ -5,7 +5,7 @@ httpget_object <- local({
       if(missing(defaultformat)){
         defaultformat <- "print";
       }
-      res$redirect(paste(req$uri(), "/", defaultformat, sep=""))
+      res$redirectpath(defaultformat);
     }
     
     #render object
@@ -20,10 +20,11 @@ httpget_object <- local({
       "json" = httpget_object_json(object),
       "rda" = httpget_object_rda(object, objectname),
       "rds" = httpget_object_rds(object, objectname),
+      "pb" = httpget_object_pb(object, objectname),
       "tab" = httpget_object_tab(object, objectname),
       "png" = httpget_object_png(object),
       "pdf" = httpget_object_pdf(object, objectname),
-      "svg" = httpget_object_svg(object, objectname),           
+      "svg" = httpget_object_svg(object, objectname),
       res$notfound(message=paste("Invalid output format for objects:", reqformat))
     )    
   }
@@ -54,7 +55,7 @@ httpget_object <- local({
       write.table(x=object, file=mytmp, row.names=as.logical(row.names), eol=eol, na=na, ...);
     }, req$get());
     res$setbody(file=mytmp);
-    res$setheader("Content-Type", 'text/plain; charset="UTF-8"');
+    res$setheader("Content-Type", 'text/plain; charset=utf-8');
     res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".tab", sep=""));
     res$finish();
   }  
@@ -124,6 +125,15 @@ httpget_object <- local({
     res$finish();
   }
   
+  httpget_object_pb <- function(object, objectname){
+    mytmp <- tempfile();
+    do.call(RProtoBuf::serialize_pb, list(object=object, connection=mytmp));
+    res$setbody(file=mytmp);
+    res$setheader("Content-Type", "application/x-protobuf");
+    res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".pb", sep=""));
+    res$finish();
+  }  
+  
   httpget_object_png <- function(object){
     if(is(object, "recordedplot")){
       object <- fixplot(object);
@@ -176,7 +186,7 @@ httpget_object <- local({
     }        
     res$setbody(file=mytmp);
     res$setheader("Content-Type", "image/svg+xml");
-    res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".svg", sep=""));      
+    #res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".svg", sep=""));      
     res$finish();    
   }    
   

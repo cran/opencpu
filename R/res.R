@@ -42,12 +42,23 @@ res <- local({
     invisible();
   }  
   
-  redirect <- function(target, status=302){
-    setbody(paste("Redirect to", target));
-    target <- gsub("//", "/", target);
+  redirect <- function(target, status=302, txt){
+    if(missing(txt)){
+      setbody(paste("Redirect to", target));
+    } else {
+      setbody(txt);
+    }    
     setheader("Location", target);
     finish(status);
   };
+    
+  redirectpath <- function(subpath, status = 302){
+    baseuri <- paste0(req$uri(), req$path_info());
+    baseuri <- sub("/$", "", baseuri);
+    subpath <- sub("^/", "", subpath);
+    fullpath <- paste0(baseuri, "/", subpath);
+    redirect(fullpath, status=status);
+  }
   
   notfound <- function(filepath, message){
     if(missing(message)){
@@ -68,8 +79,8 @@ res <- local({
   }
 
   checktrail <- function(){
-    if(!substring(req$uri(), nchar(req$uri())) == "/"){
-      redirect(paste(req$uri(), "/", sep=""))
+    if(!grepl("/$", req$path_info())){
+      redirectpath("/")
     }
   };
   
@@ -81,7 +92,7 @@ res <- local({
   
   checkmethod <- function(methods = "GET"){
     if(!(req$method() %in% methods)){
-      stop(paste("Method:", req$method(), "invalid on", req$path_info()));
+      error(paste("Method:", req$method(), "invalid on", req$path_info()), 405);
     }
   }
   
@@ -121,7 +132,7 @@ res <- local({
   sendtext <- function(text){
     text <- paste(text, collapse="\n");
     setbody(text);
-    setheader("Content-Type", 'text/plain; charset="UTF-8"')
+    setheader("Content-Type", 'text/plain; charset=utf-8')
     finish(200);
   };
   

@@ -1,5 +1,8 @@
 httpget_package_man <- local({
   main <- function(pkgpath, requri){
+    #only GET allowed
+    res$checkmethod("GET")
+    
     #extract names
     reqpackage <- basename(pkgpath);
     reqlib <- dirname(pkgpath);  
@@ -18,7 +21,7 @@ httpget_package_man <- local({
     
     #default format is text
     if(is.na(reqformat)){
-      res$redirect(paste(req$uri(), "/text", sep=""))
+      res$redirectpath("/text")
       reqformat <- "text";
     }
     
