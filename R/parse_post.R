@@ -1,11 +1,16 @@
 parse_post <- function(reqbody, contenttype){
   #check for no data
-  if(is.null(reqbody) || !length(reqbody)){
+  if(!length(reqbody)){
     return(list())  
   }
-  
+
   #strip title form header
   contenttype <- sub("Content-Type: ?", "", contenttype, ignore.case=TRUE);
+  
+  #invalid content type
+  if(!length(contenttype) || !nchar(contenttype)){
+    stop("No Content-Type header found.")  
+  }
   
   #test for multipart
   if(grepl("multipart/form-data", contenttype, fixed=TRUE)){
@@ -37,6 +42,12 @@ parse_post <- function(reqbody, contenttype){
         return(I(x))
       }
     }));
+  } else if(grepl("protobuf", contenttype, fixed=TRUE)){
+    if(is.raw(reqbody)){
+      return(RProtoBuf::unserialize_pb(reqbody));
+    } else {
+      stop("ProtoBuf payload was posted as text ??")
+    }    
   } else {
     stop("POST body with unknown conntent type: ", contenttype);
   }  

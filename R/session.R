@@ -61,7 +61,10 @@ session <- local({
     }
 
     #initiate environment
-    sessionenv <- new.env(parent=args);        
+    sessionenv <- new.env(parent=args);
+    
+    #need to do this before evaluate, in case evaluate uses set.seed
+    hash <- generate();
     
     #setup some prelim
     pdf(tempfile(), width=11.69, height=8.27, paper="A4r")
@@ -98,7 +101,6 @@ session <- local({
     #stopifnot(file.rename(execdir, sessiondir(hash))); 
     
     #store results permanently
-    hash <- generate();  
     outputdir <- sessiondir(hash);
     
     #First try renaming to destionation directory
@@ -112,7 +114,7 @@ session <- local({
     }
 
     #Shortcuts to get object immediately
-    if(format %in% c("json", "print")){
+    if(format %in% c("json", "print", "pb")){
       sendobject(hash, get(".val", sessionenv), format);
     } else if(format %in% c("console")) {
       sendobject(hash, extract(output, format), "text");
@@ -124,27 +126,21 @@ session <- local({
   
   sendobject <- function(hash, obj, format){
     tmppath <- sessionpath(hash);
-    outputpath <- paste(req$mount(), tmppath, "/", sep="");    
+    outputpath <- paste0(req$mount(), tmppath, "/");
     res$setheader("Location", outputpath); 
     res$setheader("X-ocpu-session", hash)
-    httpget_object(obj, format);
+    httpget_object(obj, format, "object");
   }
   
   #redirects the client to the session location
   sendlist <- function(hash){
     tmppath <- sessionpath(hash);
-    outputpath <- paste(req$mount(), tmppath, "/", sep="");
-    
-    #we are no longer redirecting
-    #res$redirect(outputpath, 303);    
-    
+    outputpath <- paste0(req$uri(), tmppath, "/");
     outlist <- index(sessiondir(hash));
     text <- paste(outputpath, outlist, sep="", collapse="\n");
-    res$setbody(text);
-    res$setheader("Content-Type", 'text/plain; charset="UTF-8"');
-    res$setheader("Location", outputpath);
+    res$setheader("Content-Type", 'text/plain; charset=utf-8');
     res$setheader("X-ocpu-session", hash)
-    res$finish(201);    
+    res$redirect(outputpath, 201, text)
   }
   
   #get a list of the contents of the current session
