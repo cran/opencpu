@@ -16,14 +16,24 @@ loadconfigs <- local({
     environment(config)$load(defaultconf);
     
     #override with system config file
-    if(file.exists("/etc/opencpu/server.conf")){
-      environment(config)$load("/etc/opencpu/server.conf");    
-    }
-    
-    #override with custom system config files
-    if(isTRUE(file.info("/etc/opencpu/server.conf.d")$isdir)){
-      conffiles <- list.files("/etc/opencpu/server.conf.d", full.names=TRUE, pattern=".conf$");
-      lapply(as.list(conffiles), environment(config)$load);
+    if(isTRUE(getOption("rapache"))){
+      #for cloud server
+      if(file.exists("/etc/opencpu/server.conf")){
+        environment(config)$load("/etc/opencpu/server.conf");    
+      }
+      
+      #override with custom system config files
+      if(isTRUE(file.info("/etc/opencpu/server.conf.d")$isdir)){
+        conffiles <- list.files("/etc/opencpu/server.conf.d", full.names=TRUE, pattern=".conf$");
+        lapply(as.list(conffiles), environment(config)$load);
+      }
+    } else {
+      #single user server
+      configfile <- path.expand("~/.opencpu.conf");
+      message("Loading config from ", configfile)
+      if(file.exists(configfile)){
+        environment(config)$load(configfile);
+      }
     }
     
     #set some global options
