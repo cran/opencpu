@@ -92,10 +92,10 @@ session <- local({
     output <- Filter(function(x){!emptyplot(x)}, output); 
     
     #store output
-    save(file=".RData", envir=sessionenv, list=ls(sessionenv, all.names=TRUE));
-    saveRDS(output, file=".REval");
-    saveRDS(sessionInfo(), file=".RInfo");  
-    saveRDS(.libPaths(), file=".Rlibs"); 
+    save(file=".RData", envir=sessionenv, list=ls(sessionenv, all.names=TRUE), compress=FALSE);
+    saveRDS(output, file=".REval", compress=FALSE);
+    saveRDS(sessionInfo(), file=".RInfo", compress=FALSE);  
+    saveRDS(.libPaths(), file=".Rlibs", compress=FALSE); 
 
     #does not work on windows 
     #stopifnot(file.rename(execdir, sessiondir(hash))); 
@@ -126,7 +126,7 @@ session <- local({
   
   sendobject <- function(hash, obj, format){
     tmppath <- sessionpath(hash);
-    outputpath <- paste0(req$mount(), tmppath, "/");
+    outputpath <- paste0(req$uri(), tmppath, "/");
     res$setheader("Location", outputpath); 
     res$setheader("X-ocpu-session", hash)
     httpget_object(obj, format, "object");
@@ -135,12 +135,13 @@ session <- local({
   #redirects the client to the session location
   sendlist <- function(hash){
     tmppath <- sessionpath(hash);
-    outputpath <- paste0(req$uri(), tmppath, "/");
+    path_absolute <- paste0(req$uri(), tmppath, "/");
+    path_relative <- paste0(req$mount(), tmppath, "/");
     outlist <- index(sessiondir(hash));
-    text <- paste(outputpath, outlist, sep="", collapse="\n");
+    text <- paste(path_relative, outlist, sep="", collapse="\n");
     res$setheader("Content-Type", 'text/plain; charset=utf-8');
     res$setheader("X-ocpu-session", hash)
-    res$redirect(outputpath, 201, text)
+    res$redirect(path_absolute, 201, text)
   }
   
   #get a list of the contents of the current session

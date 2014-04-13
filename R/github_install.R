@@ -10,14 +10,14 @@ github_install <- function(gitrepo, gituser, gitbranch = "master"){
   #For private repos
   mysecret <- gitsecret();
   if(length(mysecret) && length(mysecret$auth_token) && nchar(mysecret$auth_token)){
-    auth = paste0(", auth_user=", deparse(mysecret$auth_token), ", password=\"x-oauth-basic\"")
+    auth = paste0(", auth_token=", deparse(mysecret$auth_token))
   } else {
     auth = "";
   }
   
   #Dependencies = TRUE would also install currently loaded packages.
   inlib(gittmpdir, {
-    output <- try_rscript(paste0("library(methods);library(devtools);install_github(", deparse(gitrepo), ",", deparse(gituser), ",", deparse(gitbranch), auth, ", quick=TRUE, args='--library=", deparse(gittmpdir), "')"));
+    output <- try_rscript(paste0("library(methods);suppressPackageStartupMessages(library(devtools));install_github(", deparse(gitrepo), ",", deparse(gituser), ",", deparse(gitbranch), auth, ", quick=TRUE, args='--library=", deparse(gittmpdir), "')"));
   });  
   
   #We require package name with identical repo name
