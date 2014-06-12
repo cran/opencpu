@@ -1,6 +1,6 @@
-b00b174c79107efb6836e482d9b3617e *DESCRIPTION
+9e81bd70a27a40894d28ff37e3994ae0 *DESCRIPTION
 b5d75ba8379b1c4bab272ed35e52a8a3 *NAMESPACE
-4db7cded1ec0ee7834ada71b4a7a3293 *NEWS
+a5a3b0ad06957006c7c966e526b73213 *NEWS
 50ee95d57df9a8bc1a784a86c14862bc *R/bioc_load.R
 4de488a0a1c6f6aedaa5805a1dd349b3 *R/check.enabled.R
 4664df2923a92d266df56dceff3d8c84 *R/cleanup.R
@@ -88,7 +88,7 @@ d051b316111bcdea5fb338b92c2be4e8 *R/multipart.R
 92fce0ac9d9034e4b80f308058b60c19 *R/parse_arg.R
 42dfa1292aafe58828029c5462429a5d *R/parse_arg_prim.R
 a6603d8fbcd9ad0b08d41852be05f3d3 *R/parse_dots.R
-4447d816d086e4be46f0faee55da2f55 *R/parse_post.R
+ceeba122ec1fb832c5bb00f0e0bc0635 *R/parse_post.R
 5bb6c8a9e3be4b4fbd82eaec31c39b19 *R/parse_query.R
 455fabcc84d759a6573616108ff9d21a *R/printwithmax.R
 1d1758f58cfb4a8db7593c758fbdf6f7 *R/rapachehandler.R
@@ -99,7 +99,7 @@ b56a5b364e5d4fae63bb32b91501336e *R/rhttpd.R
 e8a0afdfc225afe0b24341a4d6a8c78d *R/rhttpdhandler.R
 58149ed4f8be065acac0ac7cbd4a4357 *R/rookhandler.R
 ecb259d93d685e34ce7ec99964c67d53 *R/serve.R
-fc6d811833896ca73d2ec2821b9a4f96 *R/session.R
+dd47f2fd9563d8db1373dae16e596c5f *R/session.R
 ee011bd7a46d898d22705e3b75933a55 *R/setLibPaths.R
 15bb9b06178e760eaefe519f708c4303 *R/stop.R
 1c42a8fdc8bbffd8b085e5d924d3ced1 *R/stoponwarn.R
@@ -114,9 +114,9 @@ ade6b0489cd0eff4d67463cccd0362aa *R/updategithub.R
 29d75261b1d39229ce7eb769d71dc110 *R/windir.R
 d983953da52adfcc207c3d4ffaf7d69a *build/vignette.rds
 7a933f632d2e7e00bfefda767f984152 *inst/config/defaults.conf
-4cbdd2de584f64a1329621d8cd4fb8ae *inst/doc/opencpu-server.R
+e5a3d163aa2ee2a58091bdebb747a423 *inst/doc/opencpu-server.R
 b6093f8c2c55437913106b6b81ba7d0a *inst/doc/opencpu-server.Rnw
-5f1d2809c76fc47c1506d25a9834692a *inst/doc/opencpu-server.pdf
+c0d790952ec778e76aaeae8345b0a27a *inst/doc/opencpu-server.pdf
 59bf9e5470990f773e042fa6babbef5d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
 365a247af4036532701d83957e490adc *inst/test/bootstrap/css/bootstrap-responsive.min.css
