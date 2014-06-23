@@ -40,7 +40,10 @@ httpget_object <- local({
   
   httpget_object_csv <- function(object, objectname){
     mytmp <- tempfile();
-    do.call(function(row.names=FALSE, eol="\r\n", na="", ...){
+    
+    #RFC4180 mandates CRLF, see ?write.table 
+    csv_eol <- ifelse(grepl("mingw", R.Version()$platform), "\n", "\r\n")
+    do.call(function(row.names=FALSE, eol=csv_eol, na="", ...){
       write.csv(x=object, file=mytmp, row.names=as.logical(row.names), eol=eol, na=na, ...);
     }, req$get());
     res$setbody(file=mytmp);
@@ -51,7 +54,10 @@ httpget_object <- local({
   
   httpget_object_tab <- function(object, objectname){
     mytmp <- tempfile();
-    do.call(function(row.names=FALSE, eol="\r\n", na="", ...){
+    
+    #To be consistent with csv output
+    csv_eol <- ifelse(grepl("mingw", R.Version()$platform), "\n", "\r\n")    
+    do.call(function(row.names=FALSE, eol=csv_eol, na="", ...){
       write.table(x=object, file=mytmp, row.names=as.logical(row.names), eol=eol, na=na, ...);
     }, req$get());
     res$setbody(file=mytmp);
