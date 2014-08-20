@@ -5,13 +5,12 @@ parse_query <- function(query){
   stopifnot(is.character(query));
 
   #httpuv includes the question mark in query string
-  if(identical(substring(query, 1,1), "?")){
-    query <- substring(query, 2);
-  }
+  query <- sub("^[?]", "", query)
   
-  argslist <- strsplit(query, "&")[[1]];
+  #split by & character
+  argslist <- sub("^&", "", regmatches(query, gregexpr("(^|&)[^=]+=[^&]+", query))[[1]])
   argslist <- strsplit(argslist, "=");
-  ARGS <- lapply(argslist, function(x){if(length(x) < 2) "" else x[2]});
+  ARGS <- lapply(argslist, function(x){if(length(x) < 2) "" else paste(x[-1], collapse="=")});
   ARGS <- lapply(ARGS, function(s) {utils::URLdecode(chartr('+',' ',s))});
   names(ARGS) <- lapply(argslist, "[[", 1);    
   return(ARGS)

@@ -81,11 +81,7 @@ httpget_object <- local({
       toJSON(x=object, pretty=pretty, ...);
     }, req$get());
     res$setbody(jsonstring);
-    if(is.null(req$get()$padding)){
-      res$setheader("Content-Type", "application/json");
-    } else {
-      res$setheader("Content-Type", "application/javascript");    
-    }
+    res$setheader("Content-Type", "application/json");
     res$finish();
   }
   
@@ -126,7 +122,7 @@ httpget_object <- local({
     mytmp <- tempfile();
     do.call("saveRDS", c(req$get(), list(object=object, file=mytmp)));
     res$setbody(file=mytmp);
-    res$setheader("Content-Type", "application/octet-stream");
+    res$setheader("Content-Type", "application/r-rds");
     res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".rds", sep=""));
     res$finish();
   }

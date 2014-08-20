@@ -9,9 +9,13 @@ rhttpdhandler <- function(rootpath){
   #handler  
   function(reqpath, reqquery, reqbody, reqheaders){
     
+    #get headers
+    contenttype <- grep("Content-Type:", strsplit(rawToChar(reqheaders), "\n")[[1]], ignore.case=TRUE, value=TRUE);
+    accept <- grep("Accept:", strsplit(rawToChar(reqheaders), "\n")[[1]], ignore.case=TRUE, value=TRUE);
+    accept <- sub("^accept: ?", "", accept, ignore.case=TRUE)
+    
     #process POST request body
     if(!is.null(reqbody)){
-      contenttype <- grep("Content-Type:", strsplit(rawToChar(reqheaders), "\n")[[1]], ignore.case=TRUE, value=TRUE);
       MYRAW <- list(
         body = reqbody,
         ctype = contenttype
@@ -35,7 +39,8 @@ rhttpdhandler <- function(rootpath){
       FULLMOUNT = paste0(sub("/$", "", Sys.getenv("RSTUDIO_HTTP_REFERER")), rootpath),
       GET = reqquery,
       RAW = MYRAW,
-      CTYPE = contenttype
+      CTYPE = contenttype,
+      ACCEPT = accept
     );  
     
     #call method

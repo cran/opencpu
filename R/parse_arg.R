@@ -28,15 +28,15 @@ parse_arg <- function(x){
     }
   }
   
+  #if string looks like a URL, download data
+  if(grepl("^https?://", x)){
+    return(getfromURL(x))
+  }
+  
   #check if it is a session key
-  if(grepl("^x[0-9a-f]{4,18}$", x)){
-    filepath <- file.path(session$sessiondir(x), ".RData");
-    errorifnot(file.exists(filepath), paste("Session not found:", x));
-    myenv <- new.env();
-    load(filepath, envir=myenv);
-    errorifnot(exists(".val", myenv), paste("Session", x, "does not contain an object .val"));
-    return(myenv$.val);
-  }    
+  if(grepl(session_regex(), x)){
+    x <- paste0(x, "::.val")
+  }
     
   #try to parse code. R doesn't like CR+LF
   x <- gsub("\r\n", "\n", x);  
@@ -46,12 +46,12 @@ parse_arg <- function(x){
   
   #inject code if enabled
   if(isTRUE(config("enable.post.code"))){
-    #check length
-    if(length(myexpr) > 1){
-      return(parse(text = paste("{", x, "}"), keep.source=FALSE));
-    } else {
-      return(myexpr);      
+    #wrap in block if more than one call
+    if(length(myexpr) > 1 || (is.call(myexpr[[1]]) && identical(myexpr[[1]][[1]], quote(`=`)))){
+      myexpr <- parse(text = paste("{", x, "}"), keep.source=FALSE);
     }
+    load_session_namespaces(myexpr)
+    return(myexpr)
   }
 
   #otherwise check for primitive   
@@ -61,8 +61,14 @@ parse_arg <- function(x){
   
   #check if it is a boolean, number or string 
   if(identical(1L, length(myexpr))) {
+    #parse primitives
     if(is.character(myexpr[[1]]) || is.logical(myexpr[[1]]) || is.numeric(myexpr[[1]]) || is.name(myexpr[[1]])) {
       return(myexpr);
+    }
+    #parse namespaced objects foo::bar
+    if(is.call(myexpr[[1]]) && identical(myexpr[[1]][[1]], quote(`::`))){
+      load_session_namespaces(myexpr)
+      return(myexpr)
     }
   }
   

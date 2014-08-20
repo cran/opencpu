@@ -1,3 +1,8 @@
+#create the regex to identify session keys
+session_regex <- function(){
+  paste0("^x[0-9a-f]{", config("key.length") + 1, "}$")
+}
+
 session <- local({
 
   #generates a random session hash
@@ -7,7 +12,7 @@ session <- local({
       hash <- paste(c("x0", sample(characters, config("key.length"), replace=TRUE)), collapse="")
     ))){}
     hash;
-  }  
+  }
   
   #copies a session dir
   fork <- function(oldhash){
@@ -69,35 +74,43 @@ session <- local({
     
     #setup some prelim
     pdf(tempfile(), width=11.69, height=8.27, paper="A4r")
-    dev.control(displaylist="enable");    
-    par("bg" = "white");  
+    dev.control(displaylist="enable");
+    par("bg" = "white");
+    
+    #Prevent assignments to .globalEnv
+    #Maybe enable this in a later version
+    #lockEnvironment(globalenv())
 
     #run evaluation
     #note: perhaps we should move some of the above inside eval.secure    
-    if(isTRUE(getOption("rapache"))){
+    if(use_apparmor()){
       outputlist <- RAppArmor::eval.secure({
         output <- evaluate::evaluate(input=input, envir=sessionenv, stop_on_error=2, new_device=FALSE, output_handler=myhandler);
         list(output=output, sessionenv=sessionenv);
-      }, profile = "opencpu-exec", timeout=-1); #actual timeout set in serve()
+      }, profile = "opencpu-exec", closeAllConnections = FALSE, timeout=-1); #actual timeout set in serve()
       output <- outputlist$output;
       sessionenv <- outputlist$sessionenv;
     } else {
       output <- evaluate::evaluate(input=input, envir=sessionenv, stop_on_error=2, new_device=FALSE, output_handler=myhandler);
     }
-    dev.off();   
+    dev.off()
     
     #in case code changed dir
-    setwd(execdir);
+    setwd(execdir)
+    
+    #unload session namespaces, otherwise sessionInfo() crashes
+    unload_session_namespaces()
     
     #temp fix for evaluate bug
-    output <- Filter(function(x){!emptyplot(x)}, output); 
+    #output <- Filter(function(x){!emptyplot(x)}, output); 
     
     #store output
     save(file=".RData", envir=sessionenv, list=ls(sessionenv, all.names=TRUE), compress=FALSE);
     saveRDS(output, file=".REval", compress=FALSE);
     saveRDS(sessionInfo(), file=".RInfo", compress=FALSE);  
-    saveRDS(.libPaths(), file=".Rlibs", compress=FALSE); 
-
+    saveRDS(.libPaths(), file=".Rlibs", compress=FALSE);
+    saveDESCRIPTION(hash)
+    
     #does not work on windows 
     #stopifnot(file.rename(execdir, sessiondir(hash))); 
     
@@ -205,7 +218,7 @@ session <- local({
   
   #actual directory
   sessiondir <- function(hash){
-    file.path(gettmpdir(), "tmp_library", paste0("ocpu_tmp_", hash));
+    file.path(gettmpdir(), "tmp_library", hash);
   }
   
   #http path for a session (not actual file path!)
