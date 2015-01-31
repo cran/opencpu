@@ -1,6 +1,6 @@
-5a0abc41ceab30fd82233d6c497ef68d *DESCRIPTION
-908d302ca125a10b4ccde1bdb1c03a63 *NAMESPACE
-d8da00da42f185967208630688b12aed *NEWS
+14370c0be7d7fd299092dff8dc79cebd *DESCRIPTION
+ab561c71fcc10b1b67e8cf301523aac3 *NAMESPACE
+24a08ff119cd642c9e2db0d2e9887d78 *NEWS
 50ee95d57df9a8bc1a784a86c14862bc *R/bioc_load.R
 4de488a0a1c6f6aedaa5805a1dd349b3 *R/check.enabled.R
 4664df2923a92d266df56dceff3d8c84 *R/cleanup.R
@@ -44,7 +44,7 @@ f4fc17b65f928df3879094796936e075 *R/httpget_cran.R
 1390c520e741f8a898b8202c0a73f6ce *R/httpget_github.R
 4fe851cbfc5dd27563ec0635b3e52f98 *R/httpget_info.R
 5b7929fad46b7681e0fc1a174c31b9c9 *R/httpget_library.R
-8d6a45950b72f81f1497b3bbc4de7e77 *R/httpget_object.R
+e1aa2a74f5490621919380667a20bc3f *R/httpget_object.R
 a391eda3c6397d609c5968deea8900e6 *R/httpget_package.R
 3cda13c3396befa2ab7964f8cd89685b *R/httpget_package_data.R
 a1d3b3b5e767b1712166f1944d471d11 *R/httpget_package_demo.R
@@ -91,7 +91,7 @@ f0431f34fcbcae74f283fa3f3e598770 *R/main.R
 d051b316111bcdea5fb338b92c2be4e8 *R/multipart.R
 65b41c46f257219532bb75864edd8f5c *R/onAttach.R
 c541a3e767ec1d877f50941941ff3bae *R/onLoad.R
-a597b06932e0a51c76cab6953140f2b8 *R/opencpu.R
+7435177e5c888086c8aad9e057692458 *R/opencpu.R
 04c8b5912975ae355d9c8c13081a4b53 *R/parse_arg.R
 0da25e8495f0208fc34a7a241b06533d *R/parse_arg_prim.R
 ce571825986b015c3b69fbe284d442a6 *R/parse_dots.R
@@ -103,7 +103,7 @@ c16afbb0c1f4c8f6a334e4d54ed72c0e *R/rapachehandler.R
 2ce926d4ae15232835a38df47780010c *R/req.R
 ed77c4ef0adf1d5f8a721e0557e595a1 *R/request.R
 c526a422a613972ec77150bcffd3fb06 *R/res.R
-6c67913fcc5cf69a93865d237bd9e385 *R/rhttpd.R
+c32c6bb43f56d62f467230981c45af41 *R/rhttpd.R
 954f9c771d6308cdeccfea6be0549707 *R/rhttpdhandler.R
 c9d0d7799ef00a12765b25fe80f1af79 *R/rookhandler.R
 3da1af4bb17d75a45188529533722229 *R/rstudioproxy.R
@@ -124,12 +124,13 @@ a1732bcba77253e53633c69a0490245c *R/userlibpath.R
 9df718a9ac932ea5f40a0d0d5b400377 *R/utils.R
 29d75261b1d39229ce7eb769d71dc110 *R/windir.R
 d351dc01cbcdbc5dd22b8087ae311914 *build/vignette.rds
+d6a66809ec05a4cecdd915b437f18ef0 *inst/CITATION
 7a933f632d2e7e00bfefda767f984152 *inst/config/defaults.conf
 68c61bfb0fe30b72a2b352ee29317d23 *inst/doc/opencpu-paper.Rnw
-da0b539b8bcdec2121b45566f2d5513a *inst/doc/opencpu-paper.pdf
+53b0e90278798e186853c576ad38520a *inst/doc/opencpu-paper.pdf
 e5a3d163aa2ee2a58091bdebb747a423 *inst/doc/opencpu-server.R
 134482945e89b7d39c32beed27814f0c *inst/doc/opencpu-server.Rnw
-5a5be45d718a0199344f2ff96ce466a6 *inst/doc/opencpu-server.pdf
+6d274a65ab7711c58923d1e5710b0f72 *inst/doc/opencpu-server.pdf
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
 365a247af4036532701d83957e490adc *inst/test/bootstrap/css/bootstrap-responsive.min.css
@@ -144,9 +145,9 @@ f5828bb0a740b6287b314023ab3ff7e0 *inst/test/debug.js
 88e986e29fc4d213094c3f23a9eff43c *inst/test/index.html
 628072e7212db1e8cdacb22b21752cda *inst/test/jquery-1.10.2.min.js
 73e57937304d89f251e7e540a24b095a *inst/test/spinner.gif
-80b685222bcb958434d279fd1da8bc9c *man/cleanup.Rd
-c20410090a8a81feb56a54771395f871 *man/opencpu.Rd
-1663f1fd6a962c0332ee053937ea1e0d *man/rhttpd.Rd
+0813b4e6d6eebb2819b67d4b30ee24df *man/cleanup.Rd
+162e30eaac51456a8e510fd5a52701de *man/opencpu.Rd
+a040dd7419bbffd43835b3fe493b0449 *man/rhttpd.Rd
 68c61bfb0fe30b72a2b352ee29317d23 *vignettes/opencpu-paper.Rnw
 134482945e89b7d39c32beed27814f0c *vignettes/opencpu-server.Rnw
 efbd6c97c3a348a6e4747f9355b3bf0f *vignettes/references.bib
