@@ -34,14 +34,14 @@ gist_load <- function(gistuser, gistid){
 
   #init the gist
   gisturl <- paste("https://gist.github.com", gistuser, gistid, "download", sep="/");
-  out <- GET(gisturl, add_headers("User-Agent" = "OpenCPU"));
-  stop_for_status(out);
+  out <- httr::GET(gisturl, httr::add_headers("User-Agent" = "OpenCPU"));
+  httr::stop_for_status(out);
   gisttmpfile <- tempfile("gistfile", fileext=".tar.gz");
   writeBin(out$content, gisttmpfile);
   
   gisttmpdir <- tempfile("gistdir");
   stopifnot(dir.create(gisttmpdir));
-  untar(gisttmpfile, exdir=gisttmpdir, tar="internal", restore_times=FALSE);
+  utils::untar(gisttmpfile, exdir=gisttmpdir, tar="internal", restore_times=FALSE);
   
   #a gist archive contains exactly one dir
   gistcommitname <- list.files(gisttmpdir, include.dirs=TRUE, full.names=TRUE);
