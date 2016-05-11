@@ -1,7 +1,7 @@
 Package: opencpu
 Type: Package
 Title: Embedded Scientific Computing and Reproducible Research with R
-Version: 1.5.6
+Version: 1.6.0
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 License: Apache License 2.0
@@ -24,6 +24,6 @@ Description: The OpenCPU system exposes an http API for embedded scientific
     has more detailed API documentation.
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-05-01 09:44:29 UTC; jeroen
+Packaged: 2016-05-10 20:50:49 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2016-05-01 18:39:27
+Date/Publication: 2016-05-11 00:22:21
