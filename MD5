@@ -1,6 +1,6 @@
-348aa158dad479f4980baefc494c26a6 *DESCRIPTION
+dd3544ed58c52293a7a15dcfe56d9745 *DESCRIPTION
 f711bea5abef0e15193612bfb36092cb *NAMESPACE
-727c2960adbbec3d3f7b971fbfca13b6 *NEWS
+b79c5165d0287793a0e5594cb6ecbfd7 *NEWS
 50ee95d57df9a8bc1a784a86c14862bc *R/bioc_load.R
 4de488a0a1c6f6aedaa5805a1dd349b3 *R/check.enabled.R
 4664df2923a92d266df56dceff3d8c84 *R/cleanup.R
@@ -19,7 +19,7 @@ a4a95333a840482d58c2cdef7254361e *R/eval_current.R
 b59879b9d2590e6b124ecdb02b07af3d *R/eval_psock.R
 ac5840f2333c06beb575eac6679d1b5d *R/execute_file.R
 ebdf1625e40ed7a2e5cf0802a92756cd *R/execute_function.R
-cd3cd4bc048a4d627af31c18c854bf5c *R/extract.R
+22ca535bd891bf5ec16ca07864982573 *R/extract.R
 df48cf6933f6d8d943239bfb3280558a *R/find_aliases.R
 6081aab7e33dc3599a694083ae022b63 *R/fixplot.R
 5f49713c5737f877480a1f35b893125f *R/from.R
@@ -127,11 +127,11 @@ de58a80f937ccfba3803667db48827b7 *R/userlibpath.R
 0f33881b075c50d04fe1fe3402b327ac *build/vignette.rds
 d6a66809ec05a4cecdd915b437f18ef0 *inst/CITATION
 7a933f632d2e7e00bfefda767f984152 *inst/config/defaults.conf
-567911080e25e2837e4b1f7b1374548e *inst/doc/opencpu-paper.pdf
+83c52ab33bb2dcee9bc2d720069ebd18 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 e5a3d163aa2ee2a58091bdebb747a423 *inst/doc/opencpu-server.R
 134482945e89b7d39c32beed27814f0c *inst/doc/opencpu-server.Rnw
-5818063010df7d658e09ab37e232ee22 *inst/doc/opencpu-server.pdf
+8e9509fd0edab18936d3ccc6c66a50b7 *inst/doc/opencpu-server.pdf
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
 365a247af4036532701d83957e490adc *inst/test/bootstrap/css/bootstrap-responsive.min.css
