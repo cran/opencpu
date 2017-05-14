@@ -12,8 +12,6 @@ httpget_package_man <- local({
     #show a list of objects
     if(is.na(reqobject)){
       res$sendlist(readRDS(file.path(pkgpath, "help", "aliases.rds")))
-      #HTML:
-      #send_index(find_aliases(pkgpath, reqpackage))      
     }
     
     #read the package alias list
@@ -73,7 +71,7 @@ httpget_package_man <- local({
     #mylinks <- sub(".html$", "/html", mylinks);
     #tools::Rd2HTML(rdfile, out=mytmp, package=package, Links=mylinks, stylesheet="R.css");
     mytmp <- tempfile(fileext=".html");
-    Rd2HTML(rdfile, out=mytmp, package=package);
+    tools::Rd2HTML(rdfile, out=mytmp, package=package);
     res$sendfile(mytmp); 
   }
   

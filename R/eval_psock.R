@@ -1,51 +1,37 @@
-##NOTE: the timeout works in rstudio and rgui on win, but it doesn't work in rterminal.
-eval_psock <- function(expr, envir=parent.frame(), timeout=60, opts){
-  
+call_psock <- function(fun, ..., timeout = Inf){
+  # imports
+  sendCall <- utils::getFromNamespace('sendCall', 'parallel')
+  recvResult <- utils::getFromNamespace('recvResult', 'parallel')
+
   #create a child process
-  cluster <- parallel::makePSOCKcluster(1);
-  child <- cluster[[1]];
-  from("parallel", "sendCall")(child, eval, list(quote(Sys.getpid())));
-  pid <- from("parallel", "recvResult")(child);
-  
+  cluster <- parallel::makePSOCKcluster(1)
+  child <- cluster[[1]]
+
   #set the timeout
-  setTimeLimit(elapsed=timeout, transient=TRUE);
+  setTimeLimit(elapsed = timeout)
   on.exit({
-    setTimeLimit(cpu=Inf, elapsed=Inf, transient=FALSE);
-    tools::pskill(pid); #win
-    tools::pskill(pid, tools::SIGKILL); #nix
-    from("parallel", "stopNode")(child);
-  });
-  
-  #try to set options
-  if(!missing(opts)){
-    from("parallel", "sendCall")(child, eval, list(quote(options(opts)), envir=list(opts=as.list(opts))));
-    from("parallel", "recvResult")(child);    
+    setTimeLimit(cpu = Inf, elapsed = Inf)
+    parallel::stopCluster(cluster)
+  }, add = TRUE)
+
+  #send the actual call. Make sure that packages get loaded.
+  sendCall(child, fun, list(...))
+  myresult <- recvResult(child)
+
+  #raise error. Should not happen when call has been wrapped in request()
+  if(inherits(myresult, "try-error")){
+    stop(myresult)
   }
-  
-  #send the actual call
-  #package/objects are already loaded??
-  from("parallel", "sendCall")(child, eval, list(expr=substitute(expr), envir=as.list(envir)));
-  myresult <- from("parallel", "recvResult")(child);
-  
-  #reset timelimit
-  setTimeLimit(cpu=Inf, elapsed=Inf, transient=TRUE);
-  
-  #forks don't throw errors themselves
-  if(inherits(myresult,"try-error")){
-    #snow only returns the message, not an error object
-    stop(myresult, call.=FALSE);
-  }
-  
-  #send the buffered response
-  return(myresult);   
+  return(myresult)
 }
 
-# test <- function(){
-#   n <- 1e8;
-#   k <- 1e4;
-#   #this should take more than 10 sec
-#   eval_psock(svd(matrix(rnorm(n), k)), timeout=10);
-# }
-# 
-# system.time(test());
+# This is very similar to parallel::clusterEvalQ() with a single node
+eval_psock <- function(expr, envir = parent.frame(), timeout = 60){
+  call_psock(eval, expr=substitute(expr), envir=as.list(envir))
+}
 
+# should take more than 5 sec
+test_eval_psock <- function(len = 10000){
+  n <- len^2
+  eval_psock(svd(matrix(stats::rnorm(n), len)), timeout = 5);
+}

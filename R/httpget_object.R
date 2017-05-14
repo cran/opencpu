@@ -1,9 +1,9 @@
 httpget_object <- local({
-  main <- function(object, reqformat, objectname, defaultformat){
+  main <- function(object, reqformat, objectname = "output", defaultformat = NULL){
     #Default format
     if(is.na(reqformat)){
-      if(missing(defaultformat)){
-        defaultformat <- "print";
+      if(!length(defaultformat)){
+        defaultformat <- "print"
       }
       res$redirectpath(defaultformat);
     }
@@ -19,6 +19,7 @@ httpget_object <- local({
       "feather" = httpget_object_feather(object, objectname),
       "file" = httpget_object_file(object),
       "json" = httpget_object_json(object),
+      "ndjson" = httpget_object_ndjson(object),
       "rda" = httpget_object_rda(object, objectname),
       "rds" = httpget_object_rds(object, objectname),
       "pb" = httpget_object_pb(object, objectname),
@@ -48,11 +49,11 @@ httpget_object <- local({
       write.csv(x=object, file=mytmp, row.names=as.logical(row.names), eol=eol, na=na, ...);
     }, req$get());
     res$setbody(file=mytmp);
-    res$setheader("Content-Type", "text/csv");
+    res$setheader("Content-Type", "text/csv; charset=utf-8");
     res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".csv", sep=""));
     res$finish();
   }
-  
+
   httpget_object_feather <- function(object, objectname){
     mytmp <- tempfile();
     do.call(feather::write_feather, c(list(x = object, path = mytmp), req$get()));
@@ -93,6 +94,17 @@ httpget_object <- local({
     res$setbody(jsonstring);
     res$setheader("Content-Type", "application/json");
     res$finish();
+  }
+
+  httpget_object_ndjson <- function(object){
+    buf <- rawConnection(raw(0), "r+")
+    on.exit(close(buf))
+    do.call(function(verbose = NULL, con = NULL, ...){
+      jsonlite::stream_out(x = object, con = buf, verbose = FALSE, ...)
+    }, req$get());
+    res$setbody(rawToChar(rawConnectionValue(buf)))
+    res$setheader("Content-Type", "application/x-ndjson; charset=utf-8")
+    res$finish()
   }
 
   httpget_object_print <- function(object){
@@ -147,9 +159,6 @@ httpget_object <- local({
   }
 
   httpget_object_png <- function(object){
-    if(inherits(object, "recordedplot")){
-      object <- fixplot(object);
-    }
     mytmp <- tempfile();
     do.call(function(width=800, height=600, pointsize=12, ...){
       png(type="cairo", file=mytmp, width=as.numeric(width), height=as.numeric(height), pointsize=as.numeric(pointsize), ...);
@@ -165,9 +174,6 @@ httpget_object <- local({
   }
 
   httpget_object_pdf <- function(object, objectname){
-    if(inherits(object, "recordedplot")){
-      object <- fixplot(object);
-    }
     mytmp <- tempfile();
     do.call(function(width=11.69, height=8.27, pointsize=12, paper="A4r", ...){
       pdf(file=mytmp, width=as.numeric(width), height=as.numeric(height), pointsize=as.numeric(pointsize), paper=paper, ...);
@@ -184,9 +190,6 @@ httpget_object <- local({
   }
 
   httpget_object_svg <- function(object, objectname){
-    if(inherits(object, "recordedplot")){
-      object <- fixplot(object);
-    }
     mytmp <- tempfile();
     do.call(function(width=11.69, height=8.27, pointsize=12, ...){
       svg(file=mytmp, width=as.numeric(width), height=as.numeric(height), pointsize=as.numeric(pointsize), ...);
