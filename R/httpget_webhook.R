@@ -2,7 +2,7 @@ httpget_webhook <- function(){
   if(req$method() == "GET"){
     res$sendtext(paste0(
       "To enable CI, add the following URL as a 'WebHook' in your Github repository:\n\n  ",
-      config("public.url"), "/webhook?sendmail=true\n\nSee also https://help.github.com/articles/post-receive-hooks."));
+      public_url(), "/webhook?sendmail=true\n\nSee also https://help.github.com/articles/post-receive-hooks."));
   }
 
   #make sure it's POST
@@ -35,7 +35,7 @@ httpget_webhook <- function(){
 
   #Ignore all but master
   if(is.null(gitref) || is.na(gitref) || !length(gitref) || gitref != paste0("refs/heads/", gitmaster)){
-    res$sendtext("Ignoring non-master branch.");
+    res$sendtext(sprintf("Ignoring non-master: %s (default/master branch is '%s')", gitref, gitmaster))
   }
 
   #Check for gihtub
@@ -51,15 +51,53 @@ httpget_webhook <- function(){
 webhook_install <- function(payload = NULL, sendmail = TRUE, ...){
 
   #install the package
-  result <- github_install(...);
+  result <- github_install(...)
 
   #Send email results
   if(isTRUE(sendmail)) {
-    tryCatch(mail_CI(result$success, result$output, payload), error = function(e){
-      stop("Build successful but error when sending email (check SMTP server): ", e$message);
-    });
+
+    #formulate email message
+    email_args <- create_email(result$success, result$output, payload)
+    email_args$control = list(smtpServer = config("smtp.server"))
+
+    # try to send it
+    tryCatch(do.call(sendmailR::sendmail, email_args), error = function(e){
+      errmsg <- sprintf("Build successful but error when sending email to %s (bcc: %s) (check SMTP server): %s",
+                        collapse(email_args$to), collapse(email_args$bcc), collapse(e$message))
+      res$setbody(errmsg)
+      res$finish(503)
+    })
   }
 
   #success
-  res$sendtext(paste("CI Done. Build", ifelse(result$success, "successful", "failed")));
+  res$sendtext(paste("CI Done. Build", ifelse(result$success, "successful", "failed")))
+}
+
+trigger_webhook <- function(repo = 'rwebapps/appdemo', url = 'http://localhost:5656/ocpu/webhook', email = 'jeroen@opencpu.org'){
+  info <- github_remote(repo)
+  payload <- list(
+    ref = url_path("refs/heads", info$ref),
+    repository = list(
+      after = "0000000000",
+      url = url_path("https://github.com", info$username, info$repo),
+      name = info$repo,
+      master_branch = info$ref,
+      owner = list(
+        name = info$username
+      )
+    ),
+    pusher = list(
+      name = "test pusher",
+      email = email
+    ),
+    commits = data.frame()
+  )
+  postdata <- jsonlite::toJSON(payload, auto_unbox = TRUE)
+  handle <- curl::new_handle(copypostfields = postdata)
+  curl::handle_setheaders(handle, "Content-Type" = "application/json")
+  req <- curl::curl_fetch_memory(url, handle = handle)
+  list(
+    status = req$status,
+    body = rawToChar(req$content)
+  )
 }

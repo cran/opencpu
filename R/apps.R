@@ -25,11 +25,12 @@ install_apps <- function(repo, ...){
   repo[repo %in% installed_apps()]
 }
 
-install_apps_one <- function(repo, ...){
+install_apps_one <- function(repo, force = NULL, lib = NULL, ...){
   info <- ocpu_app_info(repo)
   github_info <- github_package_info(url_path(info$user, info$repo))
   package <- github_info$package
-  lib <- info$path
+  if(!length(lib))
+    lib <- info$path
   if(!file.exists(lib)){
     dir.create(lib)
     pkgpath <- file.path(lib, package)
@@ -39,9 +40,20 @@ install_apps_one <- function(repo, ...){
         stop(sprintf("Installation of %s failed", repo))
       }
     }, add = TRUE)
+    force <- TRUE # temp workaround for devtools bug 1509
+  } else if(!length(force)) {
+    # Check if existing package needs update.
+    local_sha <- utils::packageDescription(package, lib)$GithubSHA1
+    if(length(local_sha) && !is.na(local_sha)){
+      if(identical(local_sha, app_remote_sha(repo))){
+        message(sprintf("Application '%s' is up to date (%s).", repo, substr(local_sha, 1, 7)))
+        return(invisible())
+      }
+    force <- TRUE # temp workaround for devtools bug 1509
+    }
   }
   inlib(lib, {
-    devtools::install_github(repo, force = TRUE, ...)
+    devtools::install_github(repo, force = force, ...)
     writeLines(package, file.path(lib, "_APP_"))
   })
 }
@@ -58,9 +70,10 @@ remove_apps <- function(repo){
 }
 
 ocpu_app_info <- function(repo){
-  parts <- strsplit(repo[1], "[/@#]")[[1]]
-  user <- parts[1]
-  reponame <- parts[2]
+  parts <- github_remote(repo)
+  user <- parts$username
+  reponame <- parts$repo
+  ref <- parts$ref
   path <- github_userlib(user, reponame)
   appfile <- file.path(path, "_APP_")
   package <- if(file.exists(appfile)){
@@ -71,6 +84,7 @@ ocpu_app_info <- function(repo){
   data.frame (
     user = user,
     repo = reponame,
+    ref = ref,
     package = package,
     path = path,
     installed = file.exists(path),
@@ -92,4 +106,22 @@ installed_apps <- function(){
 available_apps <- function(){
   data <- jsonlite::fromJSON('https://api.github.com/users/rwebapps/repos')
   data$full_name
+}
+
+#' @rdname apps
+#' @export
+update_apps <- function(...){
+  vapply(installed_apps(), function(x){
+    tryCatch({
+      install_apps(x, ...)
+      TRUE
+    }, error = function(e) FALSE)
+  }, logical(1))
+}
+
+# This is a workaround for https://github.com/hadley/devtools/issues/1509
+# It manually checks if a package has to be updated. This could be removed
+# once devtools 1.13.2 is on CRAN.
+app_remote_sha <- function(repo){
+  remote_sha(github_remote(repo))
 }

@@ -1,6 +1,6 @@
 Package: opencpu
 Title: Producing and Reproducing Results
-Version: 2.0
+Version: 2.0.1
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 License: Apache License 2.0
@@ -11,9 +11,9 @@ BugReports: https://github.com/opencpu/opencpu/issues
 Depends: R (>= 3.0.0)
 Imports: evaluate (>= 0.10), httpuv (>= 1.3), knitr (>= 1.6), jsonlite
         (>= 1.4), devtools (>= 1.12), sys (>= 1.3), webutils (>= 0.5),
-        curl (>= 2.5), rappdirs, zip, mime, protolite, brew, openssl,
-        pander
-Suggests: unix (>= 1.3), feather, sendmailR, R.rsp
+        curl (>= 2.5), sendmailR, rappdirs, zip, mime, protolite, brew,
+        openssl, pander
+Suggests: unix (>= 1.3), feather, R.rsp
 SystemRequirements: pandoc, apparmor (optional)
 VignetteBuilder: knitr, R.rsp
 Description: A system for embedded scientific computing and reproducible research with R.
@@ -25,6 +25,6 @@ Description: A system for embedded scientific computing and reproducible researc
     has detailed documentation and example apps.
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-05-14 10:24:18 UTC; jeroen
+Packaged: 2017-05-21 12:12:37 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2017-05-14 18:04:25 UTC
+Date/Publication: 2017-05-21 17:14:29 UTC

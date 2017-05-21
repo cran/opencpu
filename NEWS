@@ -1,13 +1,33 @@
+2.0.1
+ - ocpu_start_app() now automatically checks for app updates if online
+ - Fix for posting scripts (empty args)
+ - Support figures with error messages (for invalid graphic parameters)
+ - linux: show informative error message when tmp dir cannot be created
+ - opencpu-cache: require at least version 1.12 of nginx (fixes HTTP/2 bug)
+ - fix year of paper in citation file
+ - fix link to pdf manual in test page
+ - Add parameter 'no_cache' to single user server for development
+ - HTTP OPTIONS now returns 'Access-Control-Allow-Methods' header for CORS preflight
+ - Better email notification: to=pusher, cc=owner, bcc=archive
+ - Webhook: use sys pkg instead of system2 for running rscript
+ - Webhook: make email sending more robust
+ - Internal function trigger_webhook() to test webhook (should move to client pkg)
+ - Remove 'public.url' from server.conf
+ - Add 'update_apps()' function for convenience
+
+2.0
+ - Major rewrite :)
+
 1.6.2
  - Fix for /man/html (use tools::Rd2HTML)
- 
+
 1.6.1
  - Fix bug to support non interactive: Rscript -e 'opencpu::opencpu$debug(4000)'
  - Suggest: feather
 
 1.6.0
- - Workaround for unloadNamespace bug in R 3.3.0 
- 
+ - Workaround for unloadNamespace bug in R 3.3.0
+
 1.5.6
  - Lazy load import packages using pkg::name instead of importFrom()
 
@@ -17,7 +37,7 @@
 1.5.4
  - Bump version to sync with cloud server
  - Workaround in eval_fork for mccollect race condition bug
- 
+
 1.4.8
  - Fix for case sensitive Github usernames
 

@@ -21,8 +21,13 @@
 #' @param preload character vector of packages to preload in the workers. This speeds
 #' up requests to those packages.
 #' @param on_startup function to call once server has started (e.g. \code{browseURL})
+#' @param no_cache sets \code{Cache-Control: no-cache} for all responses to disable
+#' browser caching. Useful for development when files change frequently. Note that you
+#' might still need to manually flush the browser cache for resources cached previously.
+#' Try hitting \code{CTRL+R} or go incognito if your browser is showing old content.
 #' @example examples/apps.R
-ocpu_start_server <- function(port = 5656, root ="/ocpu", workers = 2, preload = NULL, on_startup = NULL) {
+ocpu_start_server <- function(port = 5656, root ="/ocpu", workers = 2, preload = NULL,
+                              on_startup = NULL, no_cache = FALSE) {
   if(is_rapache()){
     # some packages do ocpu_start_server() inside onAttach()
     warning("Not starting single-user server inside rapache")
@@ -64,7 +69,7 @@ ocpu_start_server <- function(port = 5656, root ="/ocpu", workers = 2, preload =
     pool <<- pool[-1]
     res <- recvResult(node)
     if(inherits(res, "try-error"))
-      stop("Cluster failed init: ", res)
+      warning("Worker preload error: ", res, call. = FALSE, immediate. = TRUE)
     structure(list(node), class = c("SOCKcluster", "cluster"))
   }
 
@@ -101,7 +106,7 @@ ocpu_start_server <- function(port = 5656, root ="/ocpu", workers = 2, preload =
   }
 
   # Start the server
-  server_id <- httpuv::startServer("0.0.0.0", port, app = rookhandler(root, run_worker))
+  server_id <- httpuv::startServer("0.0.0.0", port, app = rookhandler(root, run_worker, no_cache))
   server_address <- paste0(get_localhost(port), root)
   log("READY to serve at: %s", server_address)
   log("Press ESC or CTRL+C to quit!")
@@ -125,12 +130,13 @@ ocpu_start_server <- function(port = 5656, root ="/ocpu", workers = 2, preload =
   }
 }
 
-ocpu_start_app_github <- function(repo, ...){
-  info <- ocpu_app_info(repo)
-  if(!info$installed){
+ocpu_start_app_github <- function(repo, update = TRUE, ...){
+  if(isTRUE(update) && curl::has_internet()){
     install_apps(repo)
-    info <- ocpu_app_info(repo)
   }
+  info <- ocpu_app_info(repo)
+  if(!info$installed)
+    stop(sprintf("Application '%s' is not installed. Try: opencpu::install_apps('%s')", repo, repo))
   gitpath <- info$path
   Sys.setenv(R_LIBS = gitpath)
   on.exit(Sys.unsetenv("R_LIBS"), add = TRUE)
@@ -157,14 +163,15 @@ start_server_with_app <- function(package, path, ...){
 
 #' @rdname server
 #' @param app either the name of a locally installed package, or a github remote
-#' (see \link{install_github})
+#' (see \link{install_apps})
+#' @param update checks if the app is up-to-date (if possible) before running
 #' @param ... extra parameters passed to \link{ocpu_start_server}
 #' @export
-ocpu_start_app <- function(app, ...){
+ocpu_start_app <- function(app, update = TRUE, ...){
   if(!is.character(app) || length(app) != 1)
     stop("Parameter 'app' must be a package name or a github remote")
   if(grepl("/", app)){
-    ocpu_start_app_github(app, ...)
+    ocpu_start_app_github(app, update = update, ...)
   } else {
     start_local_app_local(app, ...)
   }
