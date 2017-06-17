@@ -1,6 +1,6 @@
 Package: opencpu
 Title: Producing and Reproducing Results
-Version: 2.0.1
+Version: 2.0.2
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 License: Apache License 2.0
@@ -25,6 +25,6 @@ Description: A system for embedded scientific computing and reproducible researc
     has detailed documentation and example apps.
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-05-21 12:12:37 UTC; jeroen
+Packaged: 2017-05-22 08:52:05 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2017-05-21 17:14:29 UTC
+Date/Publication: 2017-06-17 14:49:13 UTC
