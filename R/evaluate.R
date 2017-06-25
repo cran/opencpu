@@ -29,7 +29,12 @@ evaluate_input <- function(input, args = NULL, storeval = FALSE) {
   }
 
   #initiate environment
-  sessionenv <- new.env(parent = args)
+  #sessionenv <- new.env(parent = args)
+  sessionenv <- args
+  if(is.call(input) && utils::packageVersion('evaluate') < "0.10.2"){
+    input <- deparse(input)
+    Encoding(input) = 'UTF-8'
+  }
   res <- evaluate::evaluate(input = input, envir = sessionenv, stop_on_error = 1, output_handler = myhandler)
 
   # return both

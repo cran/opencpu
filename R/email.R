@@ -42,7 +42,11 @@ create_email <- function(success, output, payload) {
   owner <- address(payload$repository$owner$name, payload$repository$owner$email)
 
   # Compose email message
-  sender <- "\"OpenCPU CI\"<noreply@opencpu.org>"
+  sender <- if(is_ocpu_server()){
+    sprintf("\"OpenCPU CI\"<noreply@%s.ocpu.io>", gituser)
+  } else {
+    "\"OpenCPU CI\"<noreply@opencpu.org>"
+  }
   subject <- paste0("Build ", ifelse(success, "successful", "failed"), ": ", what)
   msg <- paste(msg, commitinfo, output, mysession, sep="\n\n")
 
@@ -60,7 +64,11 @@ create_email <- function(success, output, payload) {
 
   #also mail to mailing list
   if(is_ocpu_server()){
-    data$bcc <- address("OpenCPU CI Mailing List", "opencpu-ci@googlegroups.com")
+    if(is.null(data$to)){
+      data$to <- address("OpenCPU CI Mailing List", "opencpu-ci@googlegroups.com")
+    } else {
+      data$bcc <- address("OpenCPU CI Mailing List", "opencpu-ci@googlegroups.com")
+    }
   }
 
   return(data)

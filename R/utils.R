@@ -1,10 +1,14 @@
 packagename = "opencpu"
 
-write_to_file <- function(...){
-  mytempfile <- tempfile();
-  mytext <- eval(...)
-  write(mytext, mytempfile);
-  return(mytempfile)
+write_to_file <- function(text){
+  tmp <- tempfile()
+  if(is.raw(text)){
+    writeBin(text, tmp)
+  } else {
+    # useBytes prevents recoding to latin1 on Windows
+    writeLines(text, tmp, useBytes = TRUE)
+  }
+  return(tmp)
 }
 
 from <- function (pkg, name) {
@@ -63,12 +67,12 @@ send_email <- function(to, ...){
   })
 }
 
-address <- function(name, address){
-  if(!length(address) || !is.character(address) || !grepl("@", address, fixed = TRUE))
+address <- function(name, email){
+  if(!length(email) || !is.character(email) || !grepl("@", email, fixed = TRUE) || grepl("noreply", email))
     return(NULL)
   if(!length(name) || !is.character(name) || !nchar(name))
-    return(address)
-  sprintf('"%s"<%s>', name, address)
+    return(email)
+  sprintf('"%s"<%s>', name, email)
 }
 
 errbuf <- function(e){
@@ -206,5 +210,21 @@ public_url <- function(){
     url_path(config("public.url"), req$mount())
   }, error = function(e){
     req$fullmount()
+  })
+}
+
+# Make rawToChar consistent on Unix and Windows
+rawToChar <- function(x){
+  out <- base::rawToChar(x)
+  Encoding(out) <- 'UTF-8'
+  out
+}
+
+parse_utf8 <- function(x){
+  x <- gsub("\r\n", "\n", x);
+  con <- rawConnection(charToRaw(x))
+  on.exit(close(con))
+  tryCatch(parse(file = con, keep.source=FALSE, encoding = 'UTF-8'), error = function(e){
+    stop("Unparsable argument: ", x)
   })
 }
