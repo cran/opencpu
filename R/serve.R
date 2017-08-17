@@ -13,7 +13,7 @@ serve <- function(REQDATA, run_worker = NULL){
       mytmp <- normalizePath(tmp)
       on.exit({
         gc() #GC on windows closes open file descriptors before moving dir!
-        if(file.exists(file.path(mytmp, "workspace")))
+        if(file.exists(file.path(mytmp, "workspace/.RData")))
           file_move(file.path(mytmp, "workspace"), sessiondir(hash))
       }, add = TRUE)
       on.exit(unlink(mytmp, recursive = TRUE), add = TRUE)
@@ -42,20 +42,13 @@ serve <- function(REQDATA, run_worker = NULL){
   }
 
   # Don't enforce proc limit when running single user server (regular user)
-  nproc <- if(is_rapache()){
-    config("rlimit.nproc")
-  }
-
-  limits <- c(
-    cpu = timeout + 3,
-    as = config("rlimit.as"),
-    fsize = config("rlimit.fsize"),
-    nproc = nproc
-  )
-
-  ocpu_grdev <- function(file, width, height, paper, ...){
-    grDevices::pdf(NULL, width = 11.69, height = 8.27, paper = "A4r", ...)
-    graphics::par("bg" = "white")
+  limits <- if(config("enable.rlimits")){
+    c(
+      cpu = timeout + 3,
+      as = config("rlimit.as"),
+      fsize = config("rlimit.fsize"),
+      nproc = if(is_rapache()) config("rlimit.nproc")
+    )
   }
 
   # RApache (cloud server) runs request in a fork, saves workding dir and wipes tmpdir afterwards
