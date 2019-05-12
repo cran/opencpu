@@ -1,6 +1,6 @@
 Package: opencpu
 Title: Producing and Reproducing Results
-Version: 2.1.1
+Version: 2.1.2
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
 License: Apache License 2.0
@@ -26,8 +26,8 @@ Description: A system for embedded scientific computing and reproducible researc
 LazyData: yes
 RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2019-02-24 20:13:38 UTC; jeroen
+Packaged: 2019-05-12 08:43:28 UTC; jeroen
 Author: Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Repository: CRAN
-Date/Publication: 2019-02-24 22:00:14 UTC
+Date/Publication: 2019-05-12 17:10:10 UTC
