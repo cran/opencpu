@@ -1,8 +1,8 @@
-7bce02ae242e9ebe8749b07f46ac72a1 *DESCRIPTION
+a129a6790d6e2a25462872cccf3facb1 *DESCRIPTION
 aba075f486a785ea90beb4ff537d530f *NAMESPACE
-27b30a3b8c09fa975e41674ef60da9c4 *NEWS
+b2c686eb4b595704d0f2e481f277bd42 *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
-1d8df12bddb92b08c5cc4f64f248ac4e *R/config.R
+636ad2716ba5dd32143896bce751920a *R/config.R
 88ab802c7261fce7471dea96ff7d88bd *R/devtools.R
 6ac47e7a77e1a8e1eb6569330473cb16 *R/email.R
 b3f324ca4b407c5fae7c08b4face6550 *R/eval_psock.R
@@ -42,7 +42,7 @@ a76a1f4e9063974995bcee4e4a1b41e4 *R/httpget_tmp.R
 6e2734293c4a054bda6f3d07011d670f *R/httpget_user.R
 484d9c5fec39daa4b37f6524deda5d8c *R/httpget_user_library.R
 05a229c0488876fb827602ad2a9c675f *R/httpget_webhook.R
-e582088ecf1b172f87ff60188a578c28 *R/init.R
+4116fff6c82a37d55743dbd23c8ef10e *R/init.R
 6a76ff70bd82baab342333442bfbee91 *R/inlib.R
 ebad5dd98dcfc85092eba31f87b3b5a5 *R/iptools.R
 70e0207b0df0a8ac484184d977d5ee6a *R/listallusers.R
@@ -78,7 +78,7 @@ f7411ffdc34e4e2a7592c2bdcc16e6f4 *R/utils.R
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 c4294fcf80e3aa67beac58d30bb3e7f7 *inst/CITATION
 4bb4c08d0cad3e9e939dc3618c29034f *inst/config/defaults.conf
-8dc682c6a06bb05554a12a42f2088a0d *inst/doc/opencpu-paper.pdf
+f6f0a1cb62654165603455cf7f2c369b *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
