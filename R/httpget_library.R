@@ -8,8 +8,13 @@ httpget_library <- function(lib.loc, requri){
   #extract the package name
   pkgname <- utils::head(requri, 1);
   if(!length(pkgname)){
-    res$checkmethod();
-    res$sendlist(list.files(lib.loc))
+    res$checkmethod()
+    packages <- if(is.null(lib.loc)) {
+      c(loadedNamespaces(), list.files(.libPaths()))
+    } else {
+      list.files(lib.loc)
+    }
+    res$sendlist(unique(packages))
   }
 
   #shorthand for pkg::object notation
