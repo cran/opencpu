@@ -1,6 +1,6 @@
-007688adaa29f152c97fb66a95bba928 *DESCRIPTION
+e28a0b128de951ce70c55f9f41a5b541 *DESCRIPTION
 aba075f486a785ea90beb4ff537d530f *NAMESPACE
-e94e7404f3ca83073e2c8ce0997784c4 *NEWS
+e7c4db2ce1891c8c36c57a3d41dc8ad2 *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
 636ad2716ba5dd32143896bce751920a *R/config.R
 88ab802c7261fce7471dea96ff7d88bd *R/devtools.R
@@ -17,7 +17,7 @@ f6bf66e9971df2bedc3bdc4b5bf1e977 *R/httpget.R
 22235f35526e002db2e7c4382b34e611 *R/httpget_file.R
 612852ebc921a702f89c5e360c5e15f4 *R/httpget_info.R
 c17599c5ebf1d039cc0dfa26205bad5c *R/httpget_library.R
-1f8981a44f5799b592681af588b484a2 *R/httpget_object.R
+4093894c175492ad819077f40c396d76 *R/httpget_object.R
 758c4ab759732d3dab870ecafd134e48 *R/httpget_package.R
 2f0517b4bc2ba310b8fc68c963c20760 *R/httpget_package_data.R
 287568d6ec8d95a4c65610d46a7e1f86 *R/httpget_package_file.R
@@ -68,16 +68,16 @@ aead955d8df581128bd1e0d027b45bdb *R/request.R
 1b8f01d9864c7eed7a0d4a6c34dfb31f *R/script.R
 eac47b497ced74222a82c6c6703e55ca *R/secret.R
 bb63f5ba5b652aedf14d0a1fce771075 *R/serve.R
-6e8e5ac3e9f3b3b9b575d366306a5687 *R/session.R
-23dcba67341195bd5b2d47db835680ac *R/settings.R
+f95cbd6de6ce58d4775d3e9306530c48 *R/session.R
+4b241f3422022d5fb566125f3387c49a *R/settings.R
 a09ff24755a0e5b77ac334a81d31dab1 *R/start.R
 50bcac168876814d23eb42e6a57f2c18 *R/userlib.R
 f7411ffdc34e4e2a7592c2bdcc16e6f4 *R/utils.R
 e37c5feb3bce2acfaab402e57573eb55 *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 c4294fcf80e3aa67beac58d30bb3e7f7 *inst/CITATION
-4bb4c08d0cad3e9e939dc3618c29034f *inst/config/defaults.conf
-55db0812e5a9e940a279d27c26dff277 *inst/doc/opencpu-paper.pdf
+e4b3ea9614dda995a594105dfafff4a3 *inst/config/defaults.conf
+71f6ac37ebc0abdbd65f292808bbf3c8 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
@@ -93,6 +93,6 @@ f5828bb0a740b6287b314023ab3ff7e0 *inst/test/debug.js
 68ab036eeeab2cd46f386dd2215252e2 *inst/test/index.html
 628072e7212db1e8cdacb22b21752cda *inst/test/jquery-1.10.2.min.js
 ab39ff98c8708553fb7b7b432eb4e73f *inst/test/spinner.gif
-289b51d8522de6db95a9f3ed42324700 *man/apps.Rd
-b5c9ad6cf1bf80efca17d21a8c320d1c *man/server.Rd
+4d314d31c3cfb956f8f10eb238e6d71e *man/apps.Rd
+66516f86670633f8c258e6e32b4dcded *man/server.Rd
 445bc6d91735e16ddb946a25324a3684 *vignettes/opencpu-paper.pdf.asis
