@@ -1,6 +1,6 @@
-e28a0b128de951ce70c55f9f41a5b541 *DESCRIPTION
+7cffd418d370a3fd579b606727e5da1a *DESCRIPTION
 aba075f486a785ea90beb4ff537d530f *NAMESPACE
-e7c4db2ce1891c8c36c57a3d41dc8ad2 *NEWS
+d162552667cad8af53944c406951b7a2 *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
 636ad2716ba5dd32143896bce751920a *R/config.R
 88ab802c7261fce7471dea96ff7d88bd *R/devtools.R
@@ -70,14 +70,14 @@ eac47b497ced74222a82c6c6703e55ca *R/secret.R
 bb63f5ba5b652aedf14d0a1fce771075 *R/serve.R
 f95cbd6de6ce58d4775d3e9306530c48 *R/session.R
 4b241f3422022d5fb566125f3387c49a *R/settings.R
-a09ff24755a0e5b77ac334a81d31dab1 *R/start.R
+1827eaae7630f71a0b669a92f072d155 *R/start.R
 50bcac168876814d23eb42e6a57f2c18 *R/userlib.R
 f7411ffdc34e4e2a7592c2bdcc16e6f4 *R/utils.R
-e37c5feb3bce2acfaab402e57573eb55 *build/vignette.rds
+159d6262a85be2c9a4357d48dcedc84b *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 c4294fcf80e3aa67beac58d30bb3e7f7 *inst/CITATION
 e4b3ea9614dda995a594105dfafff4a3 *inst/config/defaults.conf
-71f6ac37ebc0abdbd65f292808bbf3c8 *inst/doc/opencpu-paper.pdf
+89b206168afaf676a65dbb562d39b953 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
