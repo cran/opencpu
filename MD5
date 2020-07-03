@@ -1,6 +1,6 @@
-7cffd418d370a3fd579b606727e5da1a *DESCRIPTION
+71bdac7d2e60ce62213dee00fb76e637 *DESCRIPTION
 aba075f486a785ea90beb4ff537d530f *NAMESPACE
-d162552667cad8af53944c406951b7a2 *NEWS
+194668b2f7cc0e5a2a23fc3b6624bbc1 *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
 636ad2716ba5dd32143896bce751920a *R/config.R
 88ab802c7261fce7471dea96ff7d88bd *R/devtools.R
@@ -41,7 +41,7 @@ b0ebaf908b5933737bd13f753bed6244 *R/httpget_static.R
 a76a1f4e9063974995bcee4e4a1b41e4 *R/httpget_tmp.R
 6e2734293c4a054bda6f3d07011d670f *R/httpget_user.R
 484d9c5fec39daa4b37f6524deda5d8c *R/httpget_user_library.R
-05a229c0488876fb827602ad2a9c675f *R/httpget_webhook.R
+b9f2a7ca4965d5c28bd25aa74b068faa *R/httpget_webhook.R
 4116fff6c82a37d55743dbd23c8ef10e *R/init.R
 6a76ff70bd82baab342333442bfbee91 *R/inlib.R
 ebad5dd98dcfc85092eba31f87b3b5a5 *R/iptools.R
@@ -73,11 +73,11 @@ f95cbd6de6ce58d4775d3e9306530c48 *R/session.R
 1827eaae7630f71a0b669a92f072d155 *R/start.R
 50bcac168876814d23eb42e6a57f2c18 *R/userlib.R
 f7411ffdc34e4e2a7592c2bdcc16e6f4 *R/utils.R
-159d6262a85be2c9a4357d48dcedc84b *build/vignette.rds
+0059dcaa89b7e8b98acb46e6644ffee1 *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 c4294fcf80e3aa67beac58d30bb3e7f7 *inst/CITATION
-e4b3ea9614dda995a594105dfafff4a3 *inst/config/defaults.conf
-89b206168afaf676a65dbb562d39b953 *inst/doc/opencpu-paper.pdf
+78c13e23557c706a5735d0bf263e2ee0 *inst/config/defaults.conf
+2ff47b73e411de3506a288d1f49bde69 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
