@@ -1,3 +1,11 @@
+2.2.4
+ - As per CRAN demands, the config file for the single-user server is now
+   stored in tools::R_user_dir('opencpu', 'config')
+
+2.2.3
+ - On MacOS the png output type is no longer hardcoded to 'cairo' to
+   accomodate cairo-less builds.
+
 2.2.2
  - On R 4.0 the location where the user config file for the single-user
    server is stored is now changed to comply with new CRAN policies.
