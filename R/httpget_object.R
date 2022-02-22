@@ -31,6 +31,8 @@ httpget_object <- local({
       "bin" = httpget_object_bin(object, objectname),
       "csv" = httpget_object_csv(object, objectname),
       "feather" = httpget_object_feather(object, objectname),
+      "arrowipc" = httpget_object_arrowipc(object, objectname),
+      "parquet" = httpget_object_parquet(object, objectname),
       "spss" = httpget_object_spss(object, objectname),
       "sas" = httpget_object_sas(object, objectname),
       "stata" = httpget_object_stata(object, objectname),
@@ -74,10 +76,28 @@ httpget_object <- local({
 
   httpget_object_feather <- function(object, objectname){
     mytmp <- tempfile();
-    do.call(feather::write_feather, c(list(x = object, path = mytmp), req$get()));
+    do.call(arrow::write_feather, c(list(x = object, sink = mytmp), req$get()));
     res$setbody(file = mytmp)
     res$setheader("Content-Type", "application/feather")
     res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".feather", sep=""));
+    res$finish();
+  }
+
+  httpget_object_arrowipc <- function(object, objectname){
+    mytmp <- tempfile();
+    do.call(arrow::write_ipc_stream, c(list(x = object, sink = mytmp), req$get()));
+    res$setbody(file = mytmp)
+    res$setheader("Content-Type", "application/arrowipc")
+    res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".arrow", sep=""));
+    res$finish();
+  }
+
+  httpget_object_parquet <- function(object, objectname){
+    mytmp <- tempfile();
+    do.call(arrow::write_parquet, c(list(x = object, sink = mytmp), req$get()));
+    res$setbody(file = mytmp)
+    res$setheader("Content-Type", " application/parquet")
+    res$setheader("Content-disposition", paste("attachment;filename=", objectname, ".parquet", sep=""));
     res$finish();
   }
 

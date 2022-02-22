@@ -1,3 +1,8 @@
+2.2.7
+ - The 'feather' format is now provided via the 'arrow' package, which uses
+   feather v2 by default. Use /feather?version=1 to get the old v1 format.
+ - Add new output formats 'arrowipc' and 'parquet' from arrow
+
 2.2.6
  - Fix bug for parsing JSON null values in R-4.1 and up
 
