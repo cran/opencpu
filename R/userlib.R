@@ -2,15 +2,25 @@
 userlibpath <- function(username, postfix=""){
   home <- homedir(username);
   check_mode(home)
-  homelib <- sub("~", home, Sys.getenv("R_LIBS_USER"), fixed=TRUE);
+  homelib <- sub("~", home, Sys.getenv("R_LIBS_USER", default_lib_user()), fixed=TRUE);
+  if(is_rapache() || is_admin()){
+    # This is needed as of R-4.2 because R now hardcodes R_LIBS_USER to a full path
+    apache_home <- homedir(Sys.info()[['user']])
+    homelib <- sub(apache_home, home, homelib, fixed = TRUE)
+  }
   homelib <- gsub("/+$", "", homelib);
   homelib <- paste(homelib, postfix, sep="");
   if(file.exists(homelib)){
     return(homelib);
   }
-  
+
   #failed
   return("");
+}
+
+default_lib_user <- function(){
+  info <- R.Version()
+  sprintf('~/R/%s-library/%s.%s', info$platform, info$major, substring(info$minor, 1, 1))
 }
 
 homedir <- function(username){
