@@ -1,8 +1,8 @@
-ab4ed07ad6b362a4bd3b11713f6c7eab *DESCRIPTION
+7c03f946b39fe7bbbb0d1bcf8ebf2bb1 *DESCRIPTION
 aba075f486a785ea90beb4ff537d530f *NAMESPACE
-b6136d5e04db32fafbcc1a63829a9889 *NEWS
+38da9a5b48789fcfed5c3291e891ef8f *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
-24aa10a8cfe43a84c90dcfd090d48e53 *R/config.R
+a4c8f00f6a7ded2e9afb2634fa1da3ca *R/config.R
 88ab802c7261fce7471dea96ff7d88bd *R/devtools.R
 6ac47e7a77e1a8e1eb6569330473cb16 *R/email.R
 b3f324ca4b407c5fae7c08b4face6550 *R/eval_psock.R
@@ -56,7 +56,7 @@ dabe20751a40dbe9897fcf7b4429ccb3 *R/log.R
 c9f7e65847600be44fb4687ca1a54d56 *R/parse_arg.R
 78aab7b23483b2f2377ebc7a0c072c35 *R/parse_arg_prim.R
 a92bad0696fb1a7baf76245d605c3dcc *R/parse_dots.R
-aadc1bf7d4657f3bc1ae8c9e3a4b4137 *R/parse_post.R
+165db9c2e2944bf3a89be1bdd1c57ea9 *R/parse_post.R
 898a055e8132e171fdf027869b9aae97 *R/rapache.R
 43c7fa077200f9ed9482f1dbec407b5f *R/req.R
 aead955d8df581128bd1e0d027b45bdb *R/request.R
@@ -73,11 +73,11 @@ bb63f5ba5b652aedf14d0a1fce771075 *R/serve.R
 1827eaae7630f71a0b669a92f072d155 *R/start.R
 96c74e031c297b4c5c7bbae57b91a79f *R/userlib.R
 f7411ffdc34e4e2a7592c2bdcc16e6f4 *R/utils.R
-0c42b2d7ea3ff142527d9dc914d88b26 *build/vignette.rds
+98c9d8b84f9fee122f98917ab937d85c *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
-e71c9054043848dea1e2f9a28b09970d *inst/CITATION
+38115d7991e5310d9c30437d407443be *inst/CITATION
 78c13e23557c706a5735d0bf263e2ee0 *inst/config/defaults.conf
-d294b9c2c5371eac6d4122955a9b3dd1 *inst/doc/opencpu-paper.pdf
+71d8db7ec34c4a7c50c314b141f04c1f *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
@@ -94,5 +94,6 @@ f5828bb0a740b6287b314023ab3ff7e0 *inst/test/debug.js
 628072e7212db1e8cdacb22b21752cda *inst/test/jquery-1.10.2.min.js
 ab39ff98c8708553fb7b7b432eb4e73f *inst/test/spinner.gif
 4d314d31c3cfb956f8f10eb238e6d71e *man/apps.Rd
+1cb14d9eba277db540ac9f37a2b7513e *man/figures/logo.png
 66516f86670633f8c258e6e32b4dcded *man/server.Rd
 445bc6d91735e16ddb946a25324a3684 *vignettes/opencpu-paper.pdf.asis
