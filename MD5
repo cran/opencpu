@@ -1,4 +1,4 @@
-e1b8662fd9b4e7a9895f71d1d1a2f2e1 *DESCRIPTION
+7e358111ddcf4e5974fda599b110ecf9 *DESCRIPTION
 aba075f486a785ea90beb4ff537d530f *NAMESPACE
 72298be3d18d5f7056de70139ff1de15 *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
@@ -73,11 +73,11 @@ bb63f5ba5b652aedf14d0a1fce771075 *R/serve.R
 b9df2ad66871025853f716eef8b85495 *R/start.R
 96c74e031c297b4c5c7bbae57b91a79f *R/userlib.R
 75af7f9aa51b9f8382d0f4045a0c2d71 *R/utils.R
-9d2f1747c9086756bce8750dc29567e6 *build/vignette.rds
+8735cebbe189e614b9f759e83f756681 *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 38115d7991e5310d9c30437d407443be *inst/CITATION
 1ad871381205c4d9f8abccd0971097ba *inst/config/defaults.conf
-7686cf4fa269a2c710321fd99fe27b76 *inst/doc/opencpu-paper.pdf
+a72251201885231a5f11a8b77f90f654 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
