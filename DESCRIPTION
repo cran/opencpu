@@ -1,6 +1,6 @@
 Package: opencpu
 Title: Producing and Reproducing Results
-Version: 2.2.12
+Version: 2.2.13
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
 License: Apache License 2.0
@@ -23,10 +23,10 @@ Description: A system for embedded scientific computing and reproducible researc
     The entire system is fully open source and permissively licensed. The OpenCPU website
     has detailed documentation and example apps.
 LazyData: yes
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2.9000
 NeedsCompilation: no
-Packaged: 2024-04-26 09:01:45 UTC; jeroen
+Packaged: 2024-08-16 16:02:43 UTC; jeroen
 Author: Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Repository: CRAN
-Date/Publication: 2024-05-14 15:50:02 UTC
+Date/Publication: 2024-08-17 03:40:02 UTC

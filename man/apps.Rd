@@ -20,7 +20,7 @@ available_apps()
 update_apps(...)
 }
 \arguments{
-\item{repo}{a github repository such as \code{user/repo}, see \link{install_github}.}
+\item{repo}{a github repository such as \code{user/repo}, see \link[remotes:install_github]{remotes::install_github}.}
 
 \item{...}{additional options for \code{install_github}}
 }

@@ -24,6 +24,7 @@ httpget_info <- function(requri){
   );
 }
 
+#' @export
 print.opencpu_info <- function(x, ...){
   titles <- names(x)
   type <- ifelse(is_rapache(), "Cloud", "Single-User")

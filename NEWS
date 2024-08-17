@@ -1,3 +1,7 @@
+2.2.13
+  - Fix 'anchored' man links for CRAN
+  - Raise default memory limit on cloud server to 1e10 for V8
+
 2.2.11
   - Errors raised by R now by default include a backtrace if available. You can
     opt-out by setting 'error.backtrace' to false in your user.conf.

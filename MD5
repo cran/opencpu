@@ -1,6 +1,6 @@
-7e358111ddcf4e5974fda599b110ecf9 *DESCRIPTION
-aba075f486a785ea90beb4ff537d530f *NAMESPACE
-72298be3d18d5f7056de70139ff1de15 *NEWS
+6dbb5d4d12b1f916d34109bced476177 *DESCRIPTION
+8f2a68cbfc7c4db4286462ee13074e6d *NAMESPACE
+ba638b3b6ae8458da4377134fdd6225c *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
 a4c8f00f6a7ded2e9afb2634fa1da3ca *R/config.R
 88ab802c7261fce7471dea96ff7d88bd *R/devtools.R
@@ -15,7 +15,7 @@ f6bf66e9971df2bedc3bdc4b5bf1e977 *R/httpget.R
 6bc963ba3b9827e4a6756bb459213633 *R/httpget_apps.R
 1b31d9871aa1198f196aec4bc4c3c314 *R/httpget_doc.R
 22235f35526e002db2e7c4382b34e611 *R/httpget_file.R
-612852ebc921a702f89c5e360c5e15f4 *R/httpget_info.R
+fe6fe4f7c11d04eb76bc0b7a4078b74a *R/httpget_info.R
 c17599c5ebf1d039cc0dfa26205bad5c *R/httpget_library.R
 63852dade023e19a68d3260ac807e21e *R/httpget_object.R
 758c4ab759732d3dab870ecafd134e48 *R/httpget_package.R
@@ -73,11 +73,11 @@ bb63f5ba5b652aedf14d0a1fce771075 *R/serve.R
 b9df2ad66871025853f716eef8b85495 *R/start.R
 96c74e031c297b4c5c7bbae57b91a79f *R/userlib.R
 75af7f9aa51b9f8382d0f4045a0c2d71 *R/utils.R
-8735cebbe189e614b9f759e83f756681 *build/vignette.rds
+38f0a697695b696ffa2f0729a5d28e85 *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 38115d7991e5310d9c30437d407443be *inst/CITATION
-1ad871381205c4d9f8abccd0971097ba *inst/config/defaults.conf
-a72251201885231a5f11a8b77f90f654 *inst/doc/opencpu-paper.pdf
+1589f4038aea15468e35ff4dacb73337 *inst/config/defaults.conf
+ce3064b89df7f96386393e28a1c026f0 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
@@ -93,7 +93,7 @@ f5828bb0a740b6287b314023ab3ff7e0 *inst/test/debug.js
 68ab036eeeab2cd46f386dd2215252e2 *inst/test/index.html
 628072e7212db1e8cdacb22b21752cda *inst/test/jquery-1.10.2.min.js
 ab39ff98c8708553fb7b7b432eb4e73f *inst/test/spinner.gif
-4d314d31c3cfb956f8f10eb238e6d71e *man/apps.Rd
+65e18f8249e60209047281be7adcabd5 *man/apps.Rd
 1cb14d9eba277db540ac9f37a2b7513e *man/figures/logo.png
 66516f86670633f8c258e6e32b4dcded *man/server.Rd
 445bc6d91735e16ddb946a25324a3684 *vignettes/opencpu-paper.pdf.asis
