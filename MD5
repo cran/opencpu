@@ -1,4 +1,4 @@
-6dbb5d4d12b1f916d34109bced476177 *DESCRIPTION
+1cf699073341d70968fe762f68aa9c0d *DESCRIPTION
 8f2a68cbfc7c4db4286462ee13074e6d *NAMESPACE
 ba638b3b6ae8458da4377134fdd6225c *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
@@ -77,7 +77,7 @@ b9df2ad66871025853f716eef8b85495 *R/start.R
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 38115d7991e5310d9c30437d407443be *inst/CITATION
 1589f4038aea15468e35ff4dacb73337 *inst/config/defaults.conf
-ce3064b89df7f96386393e28a1c026f0 *inst/doc/opencpu-paper.pdf
+896a9b8b72a91246aed76fa3839637f5 *inst/doc/opencpu-paper.pdf
 445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
