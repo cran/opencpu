@@ -1,4 +1,4 @@
-1cf699073341d70968fe762f68aa9c0d *DESCRIPTION
+cf75ab8c61cec6ea433c2861f68eec44 *DESCRIPTION
 8f2a68cbfc7c4db4286462ee13074e6d *NAMESPACE
 ba638b3b6ae8458da4377134fdd6225c *NEWS
 77fa304d9a6a567a3c75946ecf892d36 *R/apps.R
@@ -41,7 +41,7 @@ b0ebaf908b5933737bd13f753bed6244 *R/httpget_static.R
 a76a1f4e9063974995bcee4e4a1b41e4 *R/httpget_tmp.R
 6e2734293c4a054bda6f3d07011d670f *R/httpget_user.R
 484d9c5fec39daa4b37f6524deda5d8c *R/httpget_user_library.R
-b9f2a7ca4965d5c28bd25aa74b068faa *R/httpget_webhook.R
+aa6655049f4b5a65910259d113405aa3 *R/httpget_webhook.R
 4116fff6c82a37d55743dbd23c8ef10e *R/init.R
 6a76ff70bd82baab342333442bfbee91 *R/inlib.R
 ebad5dd98dcfc85092eba31f87b3b5a5 *R/iptools.R
@@ -73,12 +73,9 @@ bb63f5ba5b652aedf14d0a1fce771075 *R/serve.R
 b9df2ad66871025853f716eef8b85495 *R/start.R
 96c74e031c297b4c5c7bbae57b91a79f *R/userlib.R
 75af7f9aa51b9f8382d0f4045a0c2d71 *R/utils.R
-38f0a697695b696ffa2f0729a5d28e85 *build/vignette.rds
 fe8b3f890d86d6a4240c9ae1083e7701 *data/strings.rda
 38115d7991e5310d9c30437d407443be *inst/CITATION
 1589f4038aea15468e35ff4dacb73337 *inst/config/defaults.conf
-896a9b8b72a91246aed76fa3839637f5 *inst/doc/opencpu-paper.pdf
-445bc6d91735e16ddb946a25324a3684 *inst/doc/opencpu-paper.pdf.asis
 2f91440d9ca6306ef6bae5e82851847d *inst/test/R.css
 d2c30d07a98d50e945570bf32c56435f *inst/test/bootstrap/css/bootstrap-responsive.css
 365a247af4036532701d83957e490adc *inst/test/bootstrap/css/bootstrap-responsive.min.css
@@ -96,4 +93,3 @@ ab39ff98c8708553fb7b7b432eb4e73f *inst/test/spinner.gif
 65e18f8249e60209047281be7adcabd5 *man/apps.Rd
 1cb14d9eba277db540ac9f37a2b7513e *man/figures/logo.png
 66516f86670633f8c258e6e32b4dcded *man/server.Rd
-445bc6d91735e16ddb946a25324a3684 *vignettes/opencpu-paper.pdf.asis
